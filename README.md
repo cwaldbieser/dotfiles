@@ -1,8 +1,8 @@
 My Dotfiles
 ===========
 
-author: cwaldbieser
-dotfile manager: [dotdrop](https://dotdrop.readthedocs.io/en/latest/)
+- author: cwaldbieser
+- dotfile manager: [dotdrop](https://dotdrop.readthedocs.io/en/latest/)
 
 Import a dotfile
 ----------------
