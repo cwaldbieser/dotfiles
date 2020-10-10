@@ -127,8 +127,7 @@ if has('nvim')
 endif
 
 " Cycle through buffers
-:nnoremap <Tab> :bnext<CR>
-:nnoremap <S-Tab> :bprevious<CR>
+:nnoremap <S-Tab> :bnext<CR>
 
 " Fzf shortcut
 nnoremap <Leader>f :Files<CR>
