@@ -1,7 +1,7 @@
 My Dotfiles
 ===========
 
-author: cwaldbieser@gmail.com
+author: cwaldbieser
 dotfile manager: [dotdrop](https://dotdrop.readthedocs.io/en/latest/)
 
 Import a dotfile
