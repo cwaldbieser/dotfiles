@@ -82,6 +82,7 @@ filetype plugin on
 
 " Relative number
 set rnu
+set nu
 
 " Set color scheme.
 colorscheme industry
