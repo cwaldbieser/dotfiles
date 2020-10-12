@@ -133,3 +133,7 @@ endif
 " Fzf shortcut
 nnoremap <Leader>f :Files<CR>
 
+" Highlight the line the cursor is on.
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white
+
