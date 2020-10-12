@@ -11,7 +11,11 @@ dotfiles:
   f_vimrc:
     src: vimrc
     dst: ~/.vimrc
+  f_bashrc:
+    src: bashrc
+    dst: ~/.bashrc
 profiles:
   waldbiec-Latitude-7490:
     dotfiles:
     - f_vimrc
+    - f_bashrc
