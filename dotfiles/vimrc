@@ -136,4 +136,6 @@ nnoremap <Leader>f :Files<CR>
 " Highlight the line the cursor is on.
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white
+" Make spelling errors stand out even when row is hilighted.
+hi SpellBad cterm=underline
 
