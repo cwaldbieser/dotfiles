@@ -43,6 +43,8 @@ Plug 'sbdchd/neoformat'
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" Git Fugitive
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " deoplete plugin configuration
@@ -60,6 +62,8 @@ let g:jedi#use_splits_not_buffers = "right"
 let g:neomake_python_enabled_makers = ['flake8']
 " - When writing a buffer (no delay), and on normal mode changes (after 750ms).
 call neomake#configure#automake('nw', 750)
+" Open the locallist / quickfix list when errors/warnings detected.
+let g:neomake_open_list=2
 " - Use a specifc python with flake8 installed.
 let g:neomake_python_flake8_maker = {
   \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/flake8',
