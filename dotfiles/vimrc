@@ -137,9 +137,11 @@ endif
 " Fzf shortcut
 nnoremap <Leader>f :Files<CR>
 
-" Highlight the line the cursor is on.
-set cursorline
-hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white
-" Make spelling errors stand out even when row is hilighted.
+" Visual cues for my current position.
+" - Make the current line number stand out from the relative line numbers.
+hi CursorLineNR cterm=bold ctermbg=234 gui=bold guibg=#202020
+" Toggle crosshairs.
+nnoremap <f2> :set cursorcolumn! <bar> set cursorline! <CR>
+"  Make spelling errors stand out even when row is highlighted.
 hi SpellBad cterm=underline
 
