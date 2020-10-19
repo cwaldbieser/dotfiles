@@ -67,7 +67,7 @@ let g:neomake_open_list=2
 " - Use a specifc python with flake8 installed.
 let g:neomake_python_flake8_maker = {
   \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/flake8',
-  \ 'args': ['--format=default'],
+  \ 'args': ['--format=default', '--max-line-length', '95'],
   \ 'errorformat':
       \ '%E%f:%l: could not compile,%-Z%p^,' .
       \ '%A%f:%l:%c: %t%n %m,' .
@@ -77,8 +77,14 @@ let g:neomake_python_flake8_maker = {
   \ }
 
 " Neoformat
-let g:neoformat_python_yapf = {
-    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/yapf'
+" - Forgo using yapf as my Python formatter; *black* is the new black.
+"let g:neoformat_python_yapf = {
+"    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/yapf'
+"    \ }
+let g:neoformat_python_black = {
+    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/black',
+    \ 'stdin': 1,
+    \ 'args': ['-q', '-']
     \ }
 
 " Filetype detection
