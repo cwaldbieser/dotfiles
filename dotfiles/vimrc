@@ -86,6 +86,21 @@ let g:neoformat_python_black = {
     \ 'stdin': 1,
     \ 'args': ['-q', '-']
     \ }
+let g:neoformat_python_isort = {
+    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/isort',
+    \ 'stdin': 1,
+    \ 'args': ['-', '--quiet']
+    \ }
+" - Enabled formatters for Python
+let g:neoformat_enabled_python = ['black', 'isort']
+" Run black *and* isort.
+let g:neoformat_run_all_formatters = 1
+" SQL formatter
+let g:neoformat_sql_sqlformat = {
+    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/sqlformat',
+    \ 'stdin': 1,
+    \ 'args': ['--reindent', '-'],
+    \ }
 
 " Filetype detection
 filetype plugin on
