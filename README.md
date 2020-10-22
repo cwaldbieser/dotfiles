@@ -23,3 +23,9 @@ Install dotfiles
 
     (dotenv) ~/home/user@example.org:~/dotfiles$ dotfile install
     (dotenv) ~/home/user@example.org:~/dotfiles$
+
+Supporting Files
+----------------
+
+- requirements-nvim.txt: A list of Python packages installed into the Python
+  virtualenv I use for neovim.

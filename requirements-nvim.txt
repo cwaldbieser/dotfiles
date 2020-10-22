@@ -1,0 +1,7 @@
+neovim
+msgpack
+jedi
+flake8
+black
+sqlparse
+isort
