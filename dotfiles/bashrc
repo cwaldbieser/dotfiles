@@ -126,7 +126,7 @@ export EDITOR="$VISUAL"
 . /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # function to set terminal title
-function set_title {
+set_title() {
   if [[ -z "$ORIG" ]]; then
     ORIG=$PS1
   fi
