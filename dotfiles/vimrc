@@ -165,4 +165,6 @@ hi CursorLineNR cterm=bold ctermbg=234 gui=bold guibg=#202020
 nnoremap <f2> :set cursorcolumn! <bar> set cursorline! <CR>
 "  Make spelling errors stand out even when row is highlighted.
 hi SpellBad cterm=underline
-
+" Toggle colorcolumn on/off.
+nnoremap <f3> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+hi ColorColumn cterm=bold ctermbg=darkgrey gui=bold guibg=#202020
