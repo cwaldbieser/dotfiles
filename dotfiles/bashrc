@@ -119,7 +119,7 @@ fi
 # My customizations
 
 # Editor preferences.
-export VISUAL=vim
+export VISUAL=/usr/bin/nvim
 export EDITOR="$VISUAL"
 
 # virtualenvwrapper
