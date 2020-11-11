@@ -91,6 +91,12 @@ let g:neoformat_python_isort = {
     \ 'stdin': 1,
     \ 'args': ['-', '--quiet']
     \ }
+" Set JSON indent level to 4.
+let g:neoformat_json_jq = {
+    \ 'exe': 'jq',
+    \ 'stdin': 1,
+    \ 'args': ['--indent', '4', '.']
+    \ }
 " - Enabled formatters for Python
 let g:neoformat_enabled_python = ['black', 'isort']
 " Run black *and* isort.
