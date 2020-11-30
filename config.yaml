@@ -14,8 +14,12 @@ dotfiles:
   f_bashrc:
     src: bashrc
     dst: ~/.bashrc
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
 profiles:
   waldbiec-Latitude-7490:
     dotfiles:
     - f_vimrc
     - f_bashrc
+    - f_gitconfig
