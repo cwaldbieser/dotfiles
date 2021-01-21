@@ -11,7 +11,7 @@
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 # define command which will be used when "nvim" is set as a merge tool
 [mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+  cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
 [merge]
   tool = nvim
@@ -20,3 +20,5 @@
   prompt = false
 [init]
 	defaultBranch = main
+[alias]
+	new = !git init && git symbolic-ref HEAD refs/heads/main

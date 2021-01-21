@@ -45,6 +45,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Git Fugitive
 Plug 'tpope/vim-fugitive'
+" Jinja2 syntax highlighing.
+Plug 'glench/vim-jinja2-syntax'
+" Colorschemes
+Plug 'arcticicestudio/nord-vim'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+" Colorscheme switcher.
+Plug 'xolox/vim-misc' 
+Plug 'xolox/vim-colorscheme-switcher' 
 call plug#end()
 
 " deoplete plugin configuration
@@ -115,9 +123,6 @@ filetype plugin on
 set rnu
 set nu
 
-" Set color scheme.
-colorscheme industry
-
 " Remap CTRL-w to Leader-w.
 nnoremap <Leader>w <C-w>
 
@@ -174,3 +179,22 @@ hi SpellBad cterm=underline
 " Toggle colorcolumn on/off.
 nnoremap <f3> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 hi ColorColumn cterm=bold ctermbg=darkgrey gui=bold guibg=#202020
+nnoremap <f4> :set termguicolors!<CR>
+" Set color scheme.
+if exists('+termguicolors')
+    set termguicolors
+    colorscheme nebula
+else
+    set notermguicolors
+    colorscheme industry
+endif
+"if exists('+termguicolors')
+"    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"    set termguicolors
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif
+
+" On my terminal, <s-f8> produces <f20>
+nmap <f20> <s-f8>
