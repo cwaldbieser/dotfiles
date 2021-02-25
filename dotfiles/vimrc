@@ -51,8 +51,8 @@ Plug 'glench/vim-jinja2-syntax'
 Plug 'arcticicestudio/nord-vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 " Colorscheme switcher.
-Plug 'xolox/vim-misc' 
-Plug 'xolox/vim-colorscheme-switcher' 
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
 call plug#end()
 
 " deoplete plugin configuration
@@ -114,6 +114,12 @@ let g:neoformat_sql_sqlformat = {
     \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/sqlformat',
     \ 'stdin': 1,
     \ 'args': ['--reindent', '-'],
+    \ }
+" - Enabled formatters for Perl
+let g:neoformat_perl_perltidy = {
+    \ 'exe': 'perltidy',
+    \ 'args': ['-q'],
+    \ 'stdin': 1,
     \ }
 
 " Filetype detection
@@ -198,3 +204,10 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif
 
 " On my terminal, <s-f8> produces <f20>
 nmap <f20> <s-f8>
+
+" Map Neomake and Neoformat to shortcuts.
+nnoremap <f6> :Neomake <CR>
+nnoremap <f7> :Neoformat <CR>
+
+" Map spellchecking toggle
+nnoremap <f3> :setlocal spell! <CR>
