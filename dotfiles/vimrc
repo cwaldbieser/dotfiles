@@ -53,6 +53,16 @@ Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 " Colorscheme switcher.
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
+" TypeScript support
+Plug 'leafgarland/typescript-vim'
+" Plug 'Quramy/tsuquyomi'
+" Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" TypeScript, CSS, etc. formatter
+" post install (yarn install | npm install) then load plugin only for editing supported files
+"Plug 'prettier/vim-prettier', {
+"  \ 'do': 'npm install',
+"  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
 " deoplete plugin configuration
@@ -85,10 +95,9 @@ let g:neomake_python_flake8_maker = {
   \ }
 
 " Neoformat
-" - Forgo using yapf as my Python formatter; *black* is the new black.
-"let g:neoformat_python_yapf = {
-"    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/yapf'
-"    \ }
+" Global settings.
+let g:neoformat_run_all_formatters = 1
+" Language-specific
 let g:neoformat_python_black = {
     \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/black',
     \ 'stdin': 1,
@@ -99,16 +108,14 @@ let g:neoformat_python_isort = {
     \ 'stdin': 1,
     \ 'args': ['-', '--quiet']
     \ }
+" - Enabled formatters for Python
+let g:neoformat_enabled_python = ['black', 'isort']
 " Set JSON indent level to 4.
 let g:neoformat_json_jq = {
     \ 'exe': 'jq',
     \ 'stdin': 1,
     \ 'args': ['--indent', '4', '.']
     \ }
-" - Enabled formatters for Python
-let g:neoformat_enabled_python = ['black', 'isort']
-" Run black *and* isort.
-let g:neoformat_run_all_formatters = 1
 " SQL formatter
 let g:neoformat_sql_sqlformat = {
     \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/sqlformat',
@@ -120,6 +127,11 @@ let g:neoformat_perl_perltidy = {
     \ 'exe': 'perltidy',
     \ 'args': ['-q'],
     \ 'stdin': 1,
+    \ }
+let g:neoformat_typescript_prettier = {
+    \ 'exe': 'npx',
+    \ 'stdin': 1,
+    \ 'args': ['prettier', '--parser', 'typescript', '--tab-width', '4']
     \ }
 
 " Filetype detection
@@ -189,7 +201,7 @@ nnoremap <f4> :set termguicolors!<CR>
 " Set color scheme.
 if exists('+termguicolors')
     set termguicolors
-    colorscheme nebula
+    colorscheme nord
 else
     set notermguicolors
     colorscheme industry
@@ -210,4 +222,4 @@ nnoremap <f6> :Neomake <CR>
 nnoremap <f7> :Neoformat <CR>
 
 " Map spellchecking toggle
-nnoremap <f3> :setlocal spell! <CR>
+nnoremap <f9> :setlocal spell! <CR>
