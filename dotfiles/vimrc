@@ -58,11 +58,8 @@ Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi'
 " Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" TypeScript, CSS, etc. formatter
-" post install (yarn install | npm install) then load plugin only for editing supported files
-"Plug 'prettier/vim-prettier', {
-"  \ 'do': 'npm install',
-"  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+" ALE
+Plug 'dense-analysis/ale'
 call plug#end()
 
 " deoplete plugin configuration
@@ -93,6 +90,9 @@ let g:neomake_python_flake8_maker = {
       \ '%-G%.%#',
   \ 'postprocess': function('neomake#makers#ft#python#Flake8EntryProcess')
   \ }
+" TypeScript `tsc` postprocess.
+"let g:neomake_typescript_tsc_maker = extend(neomake#makers#ft#typescript#tsc(), {
+"    \ 'postprocess': function('neomake#postprocess#compress_whitespace')})
 
 " Neoformat
 " Global settings.
@@ -131,7 +131,7 @@ let g:neoformat_perl_perltidy = {
 let g:neoformat_typescript_prettier = {
     \ 'exe': 'npx',
     \ 'stdin': 1,
-    \ 'args': ['prettier', '--parser', 'typescript', '--tab-width', '4']
+    \ 'args': ['-q', 'prettier', '--parser', 'typescript', '--tab-width', '4']
     \ }
 
 " Filetype detection
@@ -223,3 +223,12 @@ nnoremap <f7> :Neoformat <CR>
 
 " Map spellchecking toggle
 nnoremap <f9> :setlocal spell! <CR>
+
+" ALE mappings for TypeScript
+augroup mytsbindings
+  autocmd! mytsbindings
+  autocmd Filetype typescript nnoremap <buffer> K :ALEDocumentation<CR>
+  autocmd Filetype typescript nnoremap <buffer> <leader>g :ALEGoToDefinition<CR>
+  autocmd Filetype typescript nnoremap <buffer> <leader>G :ALEGoToTypeDefinition<CR>
+  autocmd Filetype typescript nnoremap <buffer> <leader>n :ALEFindReferences<CR>
+augroup end
