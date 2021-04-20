@@ -229,6 +229,6 @@ augroup mytsbindings
   autocmd! mytsbindings
   autocmd Filetype typescript nnoremap <buffer> K :ALEDocumentation<CR>
   autocmd Filetype typescript nnoremap <buffer> <leader>g :ALEGoToDefinition<CR>
-  autocmd Filetype typescript nnoremap <buffer> <leader>G :ALEGoToTypeDefinition<CR>
+  autocmd Filetype typescript nnoremap <buffer> <leader>gg :ALEGoToTypeDefinition<CR>
   autocmd Filetype typescript nnoremap <buffer> <leader>n :ALEFindReferences<CR>
 augroup end
