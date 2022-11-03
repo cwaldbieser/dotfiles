@@ -3,13 +3,23 @@
     name = Carl Waldbieser
 [core]
     editor = nvim
+;[difftool]
+;    prompt = false
+;[diff]
+;    tool = nvimdiff
+;[difftool "nvimdiff"]
+;    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+# define command which will be used when "nvim" is set as a merge tool
+[diff]
+    tool = kitty
+    guitool = kitty.gui
 [difftool]
     prompt = false
-[diff]
-    tool = nvimdiff
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-# define command which will be used when "nvim" is set as a merge tool
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [mergetool "nvim"]
   cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
@@ -19,6 +29,12 @@
 [mergetool]
   prompt = false
 [init]
-	defaultBranch = main
+    defaultBranch = main
+    templatedir = ~/.git-templates
 [alias]
-	new = !git init && git symbolic-ref HEAD refs/heads/main
+    new = !git init && git symbolic-ref HEAD refs/heads/main
+[commit]
+    template = /home/waldbiec/.git-commit-template
+[credential]
+    helper = !aws codecommit credential-helper $@
+    UseHttpPath = true

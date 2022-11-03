@@ -173,3 +173,31 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# pipx initialization.
+eval "$(register-python-argcomplete pipx)"
+export PIPX_DEFAULT_PYTHON=/home/waldbiec/.pyenv/versions/3.9.0/bin/python
+
+# aws-sso-util completion
+# eval "$(_AWS_SSO_UTIL_COMPLETE=source_bash aws-sso-util)"
+
+# AWS Docker login
+function docker_login
+{
+    aws ecr get-login-password | docker login -u AWS --password-stdin "$1"
+}
+
+# pipenv
+export PIPENV_VENV_IN_PROJECT=1
+
+# Kitty ssh
+alias kssh="kitty +kitten ssh"
+# Kitty icat
+alias icat="kitty +kitten icat"
+# Kitty diff
+alias d="kitty +kitten diff"
+
+# pipenv shell --fancy
+alias peshell="pipenv shell --fancy"
+
+# Custom PS1
+source ~/.bash_prompt

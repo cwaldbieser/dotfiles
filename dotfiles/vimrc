@@ -4,7 +4,7 @@ set shiftwidth=4
 set expandtab
 
 " Python support
-let g:python3_host_prog = '/home/waldbiec/.virtualenvs/nvimenv/bin/python'
+let g:python3_host_prog = '/home/waldbiec/.pyvenvs/neovim39/.venv/bin/python'
 
 " Plugin support.
 "
@@ -50,6 +50,7 @@ Plug 'glench/vim-jinja2-syntax'
 " Colorschemes
 Plug 'arcticicestudio/nord-vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 " Colorscheme switcher.
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -60,6 +61,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 " ALE
 Plug 'dense-analysis/ale'
+" Gitgutter
+Plug 'airblade/vim-gitgutter'
+" Easymotion
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 " deoplete plugin configuration
@@ -82,7 +87,7 @@ call neomake#configure#automake('nw', 750)
 let g:neomake_open_list=2
 " - Use a specifc python with flake8 installed.
 let g:neomake_python_flake8_maker = {
-  \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/flake8',
+  \ 'exe': '/home/waldbiec/.pyvenvs/neovim39/.venv/bin/flake8',
   \ 'args': ['--format=default', '--max-line-length', '95'],
   \ 'errorformat':
       \ '%E%f:%l: could not compile,%-Z%p^,' .
@@ -95,14 +100,15 @@ let g:neomake_python_flake8_maker = {
 " Neoformat
 " Global settings.
 let g:neoformat_run_all_formatters = 1
+let g:neoformat_enabled_yaml = ['prettier']
 " Language-specific
 let g:neoformat_python_black = {
-    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/black',
+    \ 'exe': '/home/waldbiec/.pyvenvs/neovim39/.venv/bin/black',
     \ 'stdin': 1,
     \ 'args': ['-q', '-']
     \ }
 let g:neoformat_python_isort = {
-    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/isort',
+    \ 'exe': '/home/waldbiec/.pyvenvs/neovim39/.venv/bin/isort',
     \ 'stdin': 1,
     \ 'args': ['-', '--quiet']
     \ }
@@ -116,7 +122,7 @@ let g:neoformat_json_jq = {
     \ }
 " SQL formatter
 let g:neoformat_sql_sqlformat = {
-    \ 'exe': '/home/waldbiec/.virtualenvs/nvimenv/bin/sqlformat',
+    \ 'exe': '/home/waldbiec/.pyvenvs/neovim39/.venv/bin/sqlformat',
     \ 'stdin': 1,
     \ 'args': ['--reindent', '-'],
     \ }
@@ -131,6 +137,11 @@ let g:neoformat_typescript_prettier = {
     \ 'stdin': 1,
     \ 'args': ['-q', 'prettier', '--parser', 'typescript', '--tab-width', '4']
     \ }
+
+" Add local node binaries to PATH.
+if isdirectory($PWD .'/node_modules')
+    let $PATH .= ':' . $PWD . '/node_modules/.bin'
+endif
 
 " Filetype detection
 filetype plugin on
@@ -229,9 +240,28 @@ augroup mytsbindings
   autocmd Filetype typescript nnoremap <buffer> <leader>g :ALEGoToDefinition<CR>
   autocmd Filetype typescript nnoremap <buffer> <leader>gg :ALEGoToTypeDefinition<CR>
   autocmd Filetype typescript nnoremap <buffer> <leader>n :ALEFindReferences<CR>
+  autocmd Filetype typescript nnoremap <buffer> <leader>r :ALERename<CR>
+augroup end
+
+" ALE mappings for Vue JS
+augroup myvuebindings
+  autocmd! myvuebindings
+  autocmd Filetype vue nnoremap <buffer> <leader>r :ALERename<CR>
 augroup end
 
 " Remap jk to ESC
 inoremap jk <esc>
-inoremap <esc> <nop>
+" inoremap <esc> <nop>
 
+" JavaScript customizations.
+augroup myjsbindings
+  autocmd! myjsbindings
+  autocmd Filetype javascript set tabstop=2
+  autocmd Filetype javascript set shiftwidth=2
+augroup end
+
+" RST customizations
+"augroup myrestructuredtext
+"  autocmd! myrestructuredtext
+"  autocmd Filetype rst colorscheme spaceduck
+"augroup end
