@@ -20,6 +20,12 @@ dotfiles:
   f_bash_prompt:
     src: bash_prompt
     dst: ~/.bash_prompt
+  f_postactivate:
+    src: virtualenvs/postactivate
+    dst: ~/.virtualenvs/postactivate
+  f_postdeactivate:
+    src: virtualenvs/postdeactivate
+    dst: ~/.virtualenvs/postdeactivate
 profiles:
   waldbiec-Latitude-7490:
     dotfiles:
@@ -27,3 +33,5 @@ profiles:
     - f_bashrc
     - f_gitconfig
     - f_bash_prompt
+    - f_postactivate
+    - f_postdeactivate
