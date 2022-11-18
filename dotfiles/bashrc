@@ -201,3 +201,14 @@ alias peshell="pipenv shell --fancy"
 
 # Custom PS1
 source ~/.bash_prompt
+
+# Disable python virtualenv prompt customization.
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Aliases for python virtualenv activation / deactivation.
+alias pyactivate="source ./.venv/bin/activate && source $HOME/.bash_prompt"
+alias pydeactivate="deactivate && source $HOME/.bash_prompt"
+
+# View processes in visidata
+alias p='ps -eo user,pid,%cpu,%mem,vsz,time,stat,command | awk '"'"'BEGIN {OFS="\t";} {$1=$1; print;}'"'"' | vd'
+

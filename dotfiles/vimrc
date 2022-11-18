@@ -51,6 +51,7 @@ Plug 'glench/vim-jinja2-syntax'
 Plug 'arcticicestudio/nord-vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'haishanh/night-owl.vim'
 " Colorscheme switcher.
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -210,7 +211,7 @@ nnoremap <f4> :set termguicolors!<CR>
 " Set color scheme.
 if exists('+termguicolors')
     set termguicolors
-    colorscheme nord
+    colorscheme night-owl
 else
     set notermguicolors
     colorscheme industry
