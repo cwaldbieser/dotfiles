@@ -26,6 +26,9 @@ dotfiles:
   f_postdeactivate:
     src: virtualenvs/postdeactivate
     dst: ~/.virtualenvs/postdeactivate
+  f_git-commit-template:
+    src: git-commit-template
+    dst: ~/.git-commit-template
 profiles:
   waldbiec-Latitude-7490:
     dotfiles:
@@ -35,3 +38,6 @@ profiles:
     - f_bash_prompt
     - f_postactivate
     - f_postdeactivate
+  waldbiec-Latitude-7430:
+    dotfiles:
+    - f_git-commit-template
