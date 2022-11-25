@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-        color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -116,88 +116,33 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# My customizations
-
-# Editor preferences.
+# Editor
+export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
-export EDITOR="$VISUAL"
+# Bash vi editing mode.
+set -o vi
+# Preserve some emacs bindings
+# bind -m vi-command ".":insert-last-argument
+bind -m vi-insert C-k:yank-last-arg
+bind -m vi-insert "\C-l.":clear-screen
+bind -m vi-insert "\C-a.":beginning-of-line
+bind -m vi-insert "\C-e.":end-of-line
+bind -m vi-insert "\C-w.":backward-kill-word
 
-# virtualenvwrapper
+# Virtualenvwrapper
 . /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
-# function to set terminal title
-set_title() {
-  if [[ -z "$ORIG" ]]; then
-    ORIG=$PS1
-  fi
-  TITLE="\[\e]2;$*\a\]"
-  PS1=${ORIG}${TITLE}
-}
+# Created by `pipx` on 2022-11-20 00:28:47
+export PATH="$PATH:/home/waldbiec/.local/bin"
+# pipx default python
+# export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/versions/3.9.15/bin/python3.9"
 
-# Deployer root.
-export DEPLOYER_CONFIG_PREFIX=/home/waldbiec/git-repos/deployments/deployments
-
-# Local pipenv in PATH
-export PATH="$PATH:$HOME/.local/bin"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/waldbiec/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/waldbiec/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/waldbiec/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/waldbiec/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Use neovim instead of vim.
-alias vim=nvim
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
-# aws-cli completion
-complete -C /home/waldbiec/.local/bin/aws_completer aws
-
-# NodeJS version manager (nvm https://github.com/nvm-sh/nvm)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# pipx initialization.
-eval "$(register-python-argcomplete pipx)"
-export PIPX_DEFAULT_PYTHON=/home/waldbiec/.pyenv/versions/3.9.0/bin/python
-
-# aws-sso-util completion
-# eval "$(_AWS_SSO_UTIL_COMPLETE=source_bash aws-sso-util)"
-
-# AWS Docker login
-function docker_login
-{
-    aws ecr get-login-password | docker login -u AWS --password-stdin "$1"
-}
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+eval "$(pyenv virtualenv-init -)"
 
 # pipenv
 export PIPENV_VENV_IN_PROJECT=1
-
-# Kitty ssh
-alias kssh="kitty +kitten ssh"
-# Kitty icat
-alias icat="kitty +kitten icat"
-# Kitty diff
-alias d="kitty +kitten diff"
-
-# pipenv shell --fancy
-alias peshell="pipenv shell --fancy"
 
 # Custom PS1
 source ~/.bash_prompt
@@ -205,10 +150,9 @@ source ~/.bash_prompt
 # Disable python virtualenv prompt customization.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Aliases for python virtualenv activation / deactivation.
-alias pyactivate="source ./.venv/bin/activate && source $HOME/.bash_prompt"
-alias pydeactivate="deactivate && source $HOME/.bash_prompt"
+# Set the virtualenvwrapper python
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
-# View processes in visidata
-alias p='ps -eo user,pid,%cpu,%mem,vsz,time,stat,command | awk '"'"'BEGIN {OFS="\t";} {$1=$1; print;}'"'"' | vd'
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

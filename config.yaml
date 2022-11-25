@@ -14,6 +14,7 @@ dotfiles:
   f_bashrc:
     src: bashrc
     dst: ~/.bashrc
+    chmod: '644'
   f_gitconfig:
     src: gitconfig
     dst: ~/.gitconfig
@@ -33,7 +34,7 @@ dotfiles:
     src: config/ranger/rc.conf
     dst: ~/.config/ranger/rc.conf
 profiles:
-  waldbiec-Latitude-7490:
+  work:
     dotfiles:
     - f_vimrc
     - f_bashrc
@@ -41,7 +42,3 @@ profiles:
     - f_bash_prompt
     - f_postactivate
     - f_postdeactivate
-  waldbiec-Latitude-7430:
-    dotfiles:
-    - f_git-commit-template
-    - f_rc.conf
