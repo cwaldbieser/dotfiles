@@ -18,8 +18,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdcommenter'
 " NERDtree - file manager
 Plug 'preservim/nerdtree'
-" Neomake - for code linting
-Plug 'neomake/neomake'
 " vim-unimpared - shortcuts for paired operations like :lnext/:lprev
 Plug 'tpope/vim-unimpaired'
 " neoformat - code formatter
@@ -53,26 +51,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
-" Neomake
-" let g:neomake_logfile = '/tmp/neomake.log'
-let g:neomake_python_enabled_makers = ['flake8']
-" - When writing a buffer (no delay), and on normal mode changes (after
-"   750ms).
-call neomake#configure#automake('nw', 750)
-" Open the locallist / quickfix list when errors/warnings detected.
-let g:neomake_open_list=2
-" - Use a specifc python with flake8 installed.
-let g:neomake_python_flake8_maker = {
-  \ 'exe': '/home/waldbiec/.local/bin/flake8',
-  \ 'args': ['--format=default', '--max-line-length', '95', '--extend-ignore=E203,E501', '--select=C,E,F,W,B,B950'],
-  \ 'errorformat':
-      \ '%E%f:%l: could not compile,%-Z%p^,' .
-      \ '%A%f:%l:%c: %t%n %m,' .
-      \ '%A%f:%l: %t%n %m,' .
-      \ '%-G%.%#',
-  \ 'postprocess': function('neomake#makers#ft#python#Flake8EntryProcess')
-  \ }
-
 " Neoformat
 " Global settings.
 let g:neoformat_run_all_formatters = 1
@@ -96,12 +74,13 @@ let g:neoformat_json_jq = {
     \ 'stdin': 1,
     \ 'args': ['--indent', '4', '.']
     \ }
-"" SQL formatter
-"let g:neoformat_sql_sqlformat = {
-"    \ 'exe': '/home/waldbiec/.pyvenvs/neovim39/.venv/bin/sqlformat',
-"    \ 'stdin': 1,
-"    \ 'args': ['--reindent', '-'],
-"    \ }
+" SQL formatter
+" https://sqlparse.readthedocs.io/en/latest/
+let g:neoformat_sql_sqlformat = {
+    \ 'exe': '/home/waldbiec/.local/bin/sqlformat',
+    \ 'stdin': 1,
+    \ 'args': ['--reindent', '--keywords', 'upper', '-'],
+    \ }
 " - Enabled formatters for Perl
 let g:neoformat_perl_perltidy = {
     \ 'exe': 'perltidy',

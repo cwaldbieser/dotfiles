@@ -45,6 +45,4 @@ profiles:
     - f_bash_prompt
     - f_postactivate
     - f_postdeactivate
-  waldbiec-Latitude-7430:
-    dotfiles:
     - f_init.vim
