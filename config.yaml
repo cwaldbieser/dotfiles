@@ -33,6 +33,9 @@ dotfiles:
   f_rc.conf:
     src: config/ranger/rc.conf
     dst: ~/.config/ranger/rc.conf
+  f_init.vim:
+    src: config/nvim/init.vim
+    dst: ~/.config/nvim/init.vim
 profiles:
   work:
     dotfiles:
@@ -42,3 +45,6 @@ profiles:
     - f_bash_prompt
     - f_postactivate
     - f_postdeactivate
+  waldbiec-Latitude-7430:
+    dotfiles:
+    - f_init.vim
