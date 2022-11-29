@@ -13,7 +13,11 @@ let g:python3_host_prog = '/home/waldbiec/.virtualenvs/neovim.3.10.env/bin/pytho
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.config/nvim/')
 " airline - status line enhancement
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+" lualine
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'nvim-tree/nvim-web-devicons'
 " NERDcomment
 Plug 'preservim/nerdcommenter'
 " NERDtree - file manager
@@ -33,6 +37,8 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'haishanh/night-owl.vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'EdenEast/nightfox.nvim'
 " Colorscheme switcher.
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -56,18 +62,6 @@ call plug#end()
 let g:neoformat_run_all_formatters = 1
 "let g:neoformat_enabled_yaml = ['prettier']
 " Language-specific
-let g:neoformat_python_black = {
-    \ 'exe': '/home/waldbiec/.local/bin/black',
-    \ 'stdin': 1,
-    \ 'args': ['-q', '-']
-    \ }
-let g:neoformat_python_isort = {
-    \ 'exe': '/home/waldbiec/.local/bin/isort',
-    \ 'stdin': 1,
-    \ 'args': ['-', '--quiet']
-    \ }
-" - Enabled formatters for Python
-let g:neoformat_enabled_python = ['black', 'isort']
 " Set JSON indent level to 4.
 let g:neoformat_json_jq = {
     \ 'exe': 'jq',
@@ -181,8 +175,7 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif
 " On my terminal, <s-f8> produces <f20>
 nmap <f20> <s-f8>
 
-" Map Neomake and Neoformat to shortcuts.
-nnoremap <f6> :Neomake <CR>
+" Map Neoformat to shortcuts.
 nnoremap <f7> :Neoformat <CR>
 
 " Map spellchecking toggle
@@ -205,13 +198,29 @@ augroup myrestructuredtext
   autocmd Filetype rst colorscheme spaceduck
 augroup end
 
-" Language server config
-lua << EOF
--- Mappings.
-local opts = { noremap=true, silent=true }
+" Allow syntax highlighting for embedded lua and Python.
+let g:vimsyn_embed = 'lP'
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+" Lua configurations.
+lua << EOF
+-- Options for keymaps.
+local opts = { noremap=true, silent=true }
+-- keymaps
+-- Shorten function name
+local keymap = vim.api.nvim_set_keymap
+-- Visual --
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+-- Move text up and down
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+
+-- Language server configuration.
+
+--: Use an on_attach function to only map the following keys
+--: after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -224,7 +233,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-    -- vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({async=true}) end, bufopts)
@@ -233,12 +241,19 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 end
 
--- completer configuration.
+--: Completer configuration.
+--:: Autostart completer.
 local lsp = require "lspconfig"
+vim.api.nvim_exec(
+[[
+let g:coq_settings = { 'auto_start': 'shut-up' }
+]],
+false)
+--:: Import the completer module.
 local coq = require "coq" -- add this
 
 
--- this part is telling Neovim to use the pylsp server
+--: Tell Neovim to use the pylsp server for Python.
 lsp.pylsp.setup {
     on_attach = on_attach,
     flags = {
@@ -247,35 +262,41 @@ lsp.pylsp.setup {
     settings = {
         pylsp = {
             plugins = {
+                black = {
+                    enabled = true,
+                    cache_config = true,    -- default false
+                    line_length = 88,       -- default 88
+                    preview = true
+                },
                 flake8 = {
+                    enabled = true,
                     maxLineLength = 95
                 },
                 mccabe = {
                     enabled = false
                 },
                 pycodestyle = {
-                    maxLineLength = 95
+                    enabled = false,
                 }
             }
         }
     }
 }
 
--- more completer stuff
--- lsp.pylsp.setup(coq.lsp_ensure_capabilities(<stuff...>)) -- after
-
+--: Tell Neovim to use the tsserver completer for TypeScript.
 lsp.tsserver.setup{}
 
--- this is for diagnositcs signs on the line number column
--- use this to beautify the plain E W signs to more fun ones
--- !important nerdfonts needs to be setup for this to work in your terminal
-local signs = { Error = "❗", Warn = "⚠ ", Hint = "🔍", Info = "ℹ" }
+--: LSP diagnostics configuration.
+--: this is for diagnositcs signs on the line number column
+--: use this to beautify the plain E W signs to more fun ones
+--: !important nerdfonts needs to be setup for this to work in your terminal
+local signs = { Error = "❗", Warn = " ", Hint = "🔍", Info = " " }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
 end
 
--- treesitter syntax highlighting config.
+--: treesitter syntax highlighting config.
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "lua", "rust" },
@@ -318,7 +339,33 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
-EOF
 
-" the [-s, --shut-up] flag will remove the greeting message
-:COQnow -s
+--: icons
+require('nvim-web-devicons').setup()
+
+--: lualine configuration
+require('lualine').setup({
+    options={
+        -- icons_enabled=false,
+        theme='auto',
+        component_separators = { left = '|', right = '|'},
+        section_separators = { left = '', right = ''},
+    },
+    sections={
+        lualine_x={
+            {
+                'encoding',
+                -- icons_enabled=false
+            },
+            {
+                'fileformat',
+                icons_enabled=false
+            },
+            {
+                'filetype',
+                -- icons_enabled=false
+            }
+        }
+    }
+})
+EOF

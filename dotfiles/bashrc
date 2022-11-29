@@ -117,8 +117,8 @@ if ! shopt -oq posix; then
 fi
 
 # Editor
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
+export EDITOR=nvim
+export VISUAL=nvim
 # Bash vi editing mode.
 set -o vi
 # Preserve some emacs bindings
