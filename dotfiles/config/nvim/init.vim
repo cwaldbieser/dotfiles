@@ -54,6 +54,8 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Treesitter syntax highlighting
 " To install a given languare-- :TSInstall <language_to_install>
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Which key
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 
@@ -203,169 +205,10 @@ let g:vimsyn_embed = 'lP'
 
 " Lua configurations.
 lua << EOF
--- Options for keymaps.
-local opts = { noremap=true, silent=true }
--- keymaps
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Move text up and down
-keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
-
--- Language server configuration.
-
---: Use an on_attach function to only map the following keys
---: after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({async=true}) end, bufopts)
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-end
-
---: Completer configuration.
---:: Autostart completer.
-local lsp = require "lspconfig"
-vim.api.nvim_exec(
-[[
-let g:coq_settings = { 'auto_start': 'shut-up' }
-]],
-false)
---:: Import the completer module.
-local coq = require "coq" -- add this
-
-
---: Tell Neovim to use the pylsp server for Python.
-lsp.pylsp.setup {
-    on_attach = on_attach,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    settings = {
-        pylsp = {
-            plugins = {
-                black = {
-                    enabled = true,
-                    cache_config = true,    -- default false
-                    line_length = 88,       -- default 88
-                    preview = true
-                },
-                flake8 = {
-                    enabled = true,
-                    maxLineLength = 95
-                },
-                mccabe = {
-                    enabled = false
-                },
-                pycodestyle = {
-                    enabled = false,
-                }
-            }
-        }
-    }
-}
-
---: Tell Neovim to use the tsserver completer for TypeScript.
-lsp.tsserver.setup{}
-
---: LSP diagnostics configuration.
---: this is for diagnositcs signs on the line number column
---: use this to beautify the plain E W signs to more fun ones
---: !important nerdfonts needs to be setup for this to work in your terminal
-local signs = { Error = "❗", Warn = " ", Hint = "🔍", Info = " " }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
-end
-
---: treesitter syntax highlighting config.
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "rust" },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  -- List of parsers to ignore installing (for "all")
-  ignore_install = {},
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = {},
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-
---: icons
-require('nvim-web-devicons').setup()
-
---: lualine configuration
-require('lualine').setup({
-    options={
-        -- icons_enabled=false,
-        theme='auto',
-        component_separators = { left = '|', right = '|'},
-        section_separators = { left = '', right = ''},
-    },
-    sections={
-        lualine_x={
-            {
-                'encoding',
-                -- icons_enabled=false
-            },
-            {
-                'fileformat',
-                icons_enabled=false
-            },
-            {
-                'filetype',
-                -- icons_enabled=false
-            }
-        }
-    }
-})
+require('user.keymaps')
+require('user.completer')
+require('user.lsp')
+require('user.syntax')
+require('user.lualine')
+require('user.whichkey')
 EOF

@@ -36,6 +36,9 @@ dotfiles:
   f_init.vim:
     src: config/nvim/init.vim
     dst: ~/.config/nvim/init.vim
+  d_lua:
+    src: config/nvim/lua
+    dst: ~/.config/nvim/lua
 profiles:
   work:
     dotfiles:
@@ -46,3 +49,4 @@ profiles:
     - f_postactivate
     - f_postdeactivate
     - f_init.vim
+    - d_lua
