@@ -101,66 +101,20 @@ filetype plugin on
 set rnu
 set nu
 
-" Remap CTRL-w to Leader-w.
-nnoremap <Leader>w <C-w>
-
 " Allow switching buffers when there are unsaved changes.
 set hidden
 
 " No highlighting all matching searches, please.
 set nohls
 
-" Mappings for working with terminal mode.
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-    tnoremap <M-[> <Esc>
-    tnoremap <C-v><Esc> <Esc>
-    tnoremap <Leader><Esc> <Esc>
-endif
-
-if has('nvim')
-    " Terminal mode:
-    tnoremap <M-h> <c-\><c-n><c-w>h
-    tnoremap <M-j> <c-\><c-n><c-w>j
-    tnoremap <M-k> <c-\><c-n><c-w>k
-    tnoremap <M-l> <c-\><c-n><c-w>l
-    " Insert mode:
-    inoremap <M-h> <Esc><c-w>h
-    inoremap <M-j> <Esc><c-w>j
-    inoremap <M-k> <Esc><c-w>k
-    inoremap <M-l> <Esc><c-w>l
-    " Visual mode:
-    vnoremap <M-h> <Esc><c-w>h
-    vnoremap <M-j> <Esc><c-w>j
-    vnoremap <M-k> <Esc><c-w>k
-    vnoremap <M-l> <Esc><c-w>l
-    " Normal mode:
-    nnoremap <M-h> <c-w>h
-    nnoremap <M-j> <c-w>j
-    nnoremap <M-k> <c-w>k
-    nnoremap <M-l> <c-w>l
-endif
-
-" Cycle through buffers
-:nnoremap <S-Tab> :bnext<CR>
-
-" Fzf shortcut
-nnoremap <Leader>f :Files<CR>
-
 " Visual cues for my current position.
 " - Make the current line number stand out from the relative line numbers.
 hi CursorLineNR cterm=bold ctermbg=234 gui=bold guibg=#202020
-" Toggle crosshairs.
-nnoremap <f2> :set cursorcolumn! <bar> set cursorline! <CR>
 "  Make spelling errors stand out even when row is highlighted.
 hi SpellBad cterm=underline
 
-" Toggle colorcolumn on/off.
-nnoremap <f3> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+" Configure the color column.
 hi ColorColumn cterm=bold ctermbg=darkgrey gui=bold guibg=#202020
-
-" Toggle termguicolors.
-nnoremap <f4> :set termguicolors!<CR>
 
 " Set color scheme.
 if exists('+termguicolors')
@@ -170,22 +124,6 @@ else
     set notermguicolors
     colorscheme industry
 endif
-
-"Remove all trailing whitespace by pressing F5
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif
-
-" On my terminal, <s-f8> produces <f20>
-nmap <f20> <s-f8>
-
-" Map Neoformat to shortcuts.
-nnoremap <f7> :Neoformat <CR>
-
-" Map spellchecking toggle
-nnoremap <f9> :setlocal spell! <CR>
-
-" Remap jk to ESC
-inoremap jk <esc>
-" inoremap <esc> <nop>
 
 " JavaScript customizations.
 augroup myjsbindings

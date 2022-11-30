@@ -66,7 +66,9 @@ lsp.pylsp.setup {
 -- ----------------------------------------
 -- TypeScript language server configuration
 -- ----------------------------------------
-lsp.tsserver.setup{}
+lsp.tsserver.setup {
+    on_attach = on_attach,
+}
 
 -- -----------------------------
 -- LSP diagnostics configuration
