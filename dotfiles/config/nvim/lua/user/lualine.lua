@@ -1,4 +1,3 @@
-
 -- =====================
 -- Lualine configuration
 -- =====================
@@ -8,21 +7,21 @@ require('nvim-web-devicons').setup()
 
 -- lualine configuration
 require('lualine').setup({
-    options={
+    options = {
         -- icons_enabled=false,
-        theme='auto',
-        component_separators = { left = '|', right = '|'},
-        section_separators = { left = '', right = ''},
+        theme = 'auto',
+        component_separators = { left = '|', right = '|' },
+        section_separators = { left = '', right = '' },
     },
-    sections={
-        lualine_x={
+    sections = {
+        lualine_x = {
             {
                 'encoding',
                 -- icons_enabled=false
             },
             {
                 'fileformat',
-                icons_enabled=false
+                icons_enabled = false
             },
             {
                 'filetype',
@@ -31,4 +30,3 @@ require('lualine').setup({
         }
     }
 })
-

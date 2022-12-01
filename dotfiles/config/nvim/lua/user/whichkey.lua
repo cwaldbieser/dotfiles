@@ -1,6 +1,5 @@
-
 -- ======================
--- WhichKey configuration 
+-- WhichKey configuration
 -- ======================
 
 require("which-key").setup {}

@@ -1,4 +1,3 @@
-
 -- =============================================
 -- Neovim Language Server Protocol configuration
 -- =============================================
@@ -8,11 +7,12 @@ local add_desc = require('user.keymap_helper').add_desc
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer.
-local on_attach = function(client, bufnr)
+-- `on_attach(client, bufnr)`
+local on_attach = function(_, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, add_desc(bufopts, 'Get help on symbol under cursor.'))
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, add_desc(bufopts, 'Go to definition.'))
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, add_desc(bufopts, 'Go to implementation.'))
@@ -22,7 +22,8 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, add_desc(bufopts, 'Go to type definition.'))
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, add_desc(bufopts, 'Rename symbol.'))
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({async=true}) end, add_desc(bufopts, 'Format code.'))
+    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end,
+        add_desc(bufopts, 'Format code.'))
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
     vim.keymap.set('n', '<space>l', vim.diagnostic.setloclist, add_desc(bufopts, 'Send diagnostics to location list.'))
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, add_desc(bufopts, 'Previous diagnostic.'))
@@ -44,8 +45,8 @@ lsp.pylsp.setup {
             plugins = {
                 black = {
                     enabled = true,
-                    cache_config = true,    -- default false
-                    line_length = 88,       -- default 88
+                    cache_config = true, -- default false
+                    line_length = 88, -- default 88
                     preview = true
                 },
                 flake8 = {
@@ -70,6 +71,35 @@ lsp.tsserver.setup {
     on_attach = on_attach,
 }
 
+-- -------------------
+-- Lua language server
+-- -------------------
+lsp.sumneko_lua.setup {
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+                -- Suppress workspace query for VS Code.
+                checkThirdParty = false,
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+}
+
 -- -----------------------------
 -- LSP diagnostics configuration
 -- -----------------------------
@@ -79,6 +109,5 @@ lsp.tsserver.setup {
 local signs = { Error = "❗", Warn = " ", Hint = "🔍", Info = " " }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
