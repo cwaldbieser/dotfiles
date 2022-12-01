@@ -22,3 +22,6 @@ vim.opt.hls = false
 
 -- Allow syntax highlighting for embedded lua and Python.
 vim.g.vimsyn_embed = 'lP'
+
+-- Activate termguicolors.
+vim.opt.termguicolors = true

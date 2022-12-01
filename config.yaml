@@ -33,12 +33,12 @@ dotfiles:
   f_rc.conf:
     src: config/ranger/rc.conf
     dst: ~/.config/ranger/rc.conf
-  f_init.vim:
-    src: config/nvim/init.vim
-    dst: ~/.config/nvim/init.vim
   d_lua:
     src: config/nvim/lua
     dst: ~/.config/nvim/lua
+  f_init.lua:
+    src: config/nvim/init.lua
+    dst: ~/.config/nvim/init.lua
 profiles:
   work:
     dotfiles:
@@ -48,5 +48,5 @@ profiles:
     - f_bash_prompt
     - f_postactivate
     - f_postdeactivate
-    - f_init.vim
     - d_lua
+    - f_init.lua

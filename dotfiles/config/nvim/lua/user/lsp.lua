@@ -11,7 +11,8 @@ local add_desc = require('user.keymap_helper').add_desc
 local on_attach = function(_, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
+    local leader_temp = vim.g.mapleader
+    vim.g.mapleader = ' '
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, add_desc(bufopts, 'Get help on symbol under cursor.'))
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, add_desc(bufopts, 'Go to definition.'))
@@ -20,14 +21,15 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, add_desc(bufopts, 'Go to declaration.'))
     vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, add_desc(bufopts, 'Signature help.'))
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, add_desc(bufopts, 'Go to type definition.'))
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, add_desc(bufopts, 'Rename symbol.'))
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end,
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, add_desc(bufopts, 'Rename symbol.'))
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
+    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end,
         add_desc(bufopts, 'Format code.'))
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
-    vim.keymap.set('n', '<space>l', vim.diagnostic.setloclist, add_desc(bufopts, 'Send diagnostics to location list.'))
+    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
+    vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist, add_desc(bufopts, 'Send diagnostics to location list.'))
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, add_desc(bufopts, 'Previous diagnostic.'))
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, add_desc(bufopts, 'Next diagnostic.'))
+    vim.g.mapleader = leader_temp
 end
 
 local lsp = require('lspconfig')
