@@ -22,13 +22,16 @@ Plug('junegunn/fzf.vim')
 -- Git Fugitive
 Plug('tpope/vim-fugitive')
 -- Colorschemes
-Plug('morhetz/gruvbox')
-Plug('arcticicestudio/nord-vim')
-Plug('pineapplegiant/spaceduck', { branch = 'main' })
+Plug('rockerBOO/boo-colorscheme-nvim')
 Plug('challenger-deep-theme/vim', { as = 'challenger-deep' })
-Plug('haishanh/night-owl.vim')
-Plug('folke/tokyonight.nvim', { branch = 'main' })
+Plug('morhetz/gruvbox')
+Plug('rafamadriz/neon')
 Plug('EdenEast/nightfox.nvim')
+Plug('haishanh/night-owl.vim')
+Plug('arcticicestudio/nord-vim')
+Plug('rmehri01/onenord.nvim', { branch = 'main' })
+Plug('pineapplegiant/spaceduck', { branch = 'main' })
+Plug('folke/tokyonight.nvim', { branch = 'main' })
 -- Colorscheme switcher.
 Plug('xolox/vim-misc')
 Plug('xolox/vim-colorscheme-switcher')
@@ -44,7 +47,7 @@ Plug('ms-jpq/coq.artifacts', { branch = 'artifacts' })
 -- Treesitter syntax highlighting
 -- To install a given languare-- :TSInstall <language_to_install>
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('nvim-treesitter/playground')
 -- Which key
 Plug('folke/which-key.nvim')
-
 vim.call('plug#end')

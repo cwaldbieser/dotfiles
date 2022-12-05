@@ -46,6 +46,10 @@ keymap("n", "<f7>", ":Neoformat <CR>", add_desc(opts, "Invoke Neoformat."))
 -- Toggle spell checking.
 keymap("n", "<f9>", ":setlocal spell! <CR>", add_desc(opts, "Toggle spell checking."))
 
+-- After paging half a screen, center the line in the middle of the screen.
+keymap("n", "<C-d>", "<C-d>zz", add_desc(opts, "Scroll half page down."))
+keymap("n", "<C-u>", "<C-u>zz", add_desc(opts, "Scroll half page up."))
+
 -- -------------------
 -- Insert mode keymaps
 -- -------------------

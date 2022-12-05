@@ -7,8 +7,6 @@ vim.cmd('hi CursorLineNR cterm=bold ctermbg=234 gui=bold guibg=#202020')
 vim.cmd('hi SpellBad cterm=underline')
 -- Configure the color column.
 vim.cmd('hi ColorColumn cterm=bold ctermbg=darkgrey gui=bold guibg=#202020')
--- Set the colorscheme.
-vim.cmd('colorscheme night-owl')
 
 -- RST customizations
 local augroup_rst = vim.api.nvim_create_augroup('myrestructuredtext', { clear = true })
