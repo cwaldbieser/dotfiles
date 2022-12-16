@@ -50,4 +50,7 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug('nvim-treesitter/playground')
 -- Which key
 Plug('folke/which-key.nvim')
+-- Lua colorschemes
+Plug('tjdevries/colorbuddy.nvim')
+Plug('lalitmee/cobalt2.nvim')
 vim.call('plug#end')

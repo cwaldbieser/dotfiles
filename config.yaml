@@ -39,6 +39,9 @@ dotfiles:
   f_init.lua:
     src: config/nvim/init.lua
     dst: ~/.config/nvim/init.lua
+  f_injections.scm:
+    src: config/nvim/after/queries/python/injections.scm
+    dst: ~/.config/nvim/after/queries/python/injections.scm
 profiles:
   work:
     dotfiles:
@@ -50,3 +53,4 @@ profiles:
     - f_postdeactivate
     - d_lua
     - f_init.lua
+    - f_injections.scm

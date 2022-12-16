@@ -30,6 +30,8 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, add_desc(bufopts, 'Previous diagnostic.'))
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, add_desc(bufopts, 'Next diagnostic.'))
     vim.g.mapleader = leader_temp
+    -- This should really be conditional depending on the LSP server.
+    vim.opt.formatexpr = ""
 end
 
 local lsp = require('lspconfig')

@@ -50,6 +50,9 @@ keymap("n", "<f9>", ":setlocal spell! <CR>", add_desc(opts, "Toggle spell checki
 keymap("n", "<C-d>", "<C-d>zz", add_desc(opts, "Scroll half page down."))
 keymap("n", "<C-u>", "<C-u>zz", add_desc(opts, "Scroll half page up."))
 
+-- Experimental
+keymap("n", "<space>C", ":lua package.loaded['colorbuddy'] = nil package.loaded['cobalt2'] = nil require('colorbuddy').colorscheme('cobalt2')<CR>", add_desc(opts, "Cobalt2 colorscheme"))
+
 -- -------------------
 -- Insert mode keymaps
 -- -------------------
