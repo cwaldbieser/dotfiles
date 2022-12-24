@@ -74,5 +74,5 @@ M["pysqlmagic"] = function()
         end
     end
 end
-
+vim.api.nvim_create_user_command("PySQLMagic", ':lua require("user.pysql").pysqlmagic()<CR>', {})
 return M
