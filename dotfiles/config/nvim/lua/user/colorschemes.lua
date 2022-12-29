@@ -19,10 +19,16 @@ local function swtchcolors(opts)
     local colorbuddy_schemes = {
         ["cobalt2"] = true,
     }
+    local require_setup_schemes = {
+        ["onenord"] = true,
+    }
     if colorbuddy_schemes[cs] then
         package.loaded['colorbuddy'] = nil
         package.loaded[cs] = nil
         require('colorbuddy').colorscheme(cs)
+    elseif require_setup_schemes[cs] then
+        package.loaded[cs] = nil
+        require(cs).setup()
     else
         vim.cmd("colorscheme " .. cs)
     end
