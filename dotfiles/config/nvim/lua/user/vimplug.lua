@@ -32,6 +32,7 @@ Plug('arcticicestudio/nord-vim')
 Plug('rmehri01/onenord.nvim', { branch = 'main' })
 Plug('pineapplegiant/spaceduck', { branch = 'main' })
 Plug('folke/tokyonight.nvim', { branch = 'main' })
+Plug('Yagua/nebulous.nvim')
 -- Colorscheme switcher.
 Plug('xolox/vim-misc')
 Plug('xolox/vim-colorscheme-switcher')

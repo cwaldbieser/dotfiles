@@ -6,7 +6,9 @@ require('onenord').setup()
 
 -- Set the colorscheme.
 vim.cmd('colorscheme night-owl')
--- require('colorbuddy').colorscheme('cobalt2')
+
+-- "nebulous" variant switcher
+-- :lua require("nebulous.functions").toggle_variant()
 
 -- -----------------------
 -- Configure colorswitcher
@@ -21,6 +23,7 @@ local function swtchcolors(opts)
     }
     local require_setup_schemes = {
         ["onenord"] = true,
+        ["nebulous"] = true,
     }
     if colorbuddy_schemes[cs] then
         package.loaded['colorbuddy'] = nil
