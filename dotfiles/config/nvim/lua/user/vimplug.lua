@@ -10,8 +10,6 @@ Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-tree/nvim-web-devicons')
 -- NERDcomment
 Plug('preservim/nerdcommenter')
--- NERDtree - file manager
-Plug('preservim/nerdtree')
 -- vim-unimpared - shortcuts for paired operations like :lnext/:lprev
 Plug('tpope/vim-unimpaired')
 -- neoformat - code formatter
@@ -54,4 +52,8 @@ Plug('folke/which-key.nvim')
 -- Lua colorschemes
 Plug('tjdevries/colorbuddy.nvim')
 Plug('lalitmee/cobalt2.nvim')
+---- Ranger file manager integration.
+--Plug('kevinhwang91/rnvimr')
+-- nvim-tree file explorer
+Plug('nvim-tree/nvim-tree.lua')
 vim.call('plug#end')

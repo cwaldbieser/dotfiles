@@ -1,4 +1,3 @@
-
 -- ===================
 -- User custom keymaps
 -- ===================
@@ -8,7 +7,7 @@ local add_desc = require('user.keymap_helper').add_desc
 local keymap = vim.api.nvim_set_keymap
 
 -- Default options for keymaps.
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 
 -- -------------------
 -- Normal mode keymaps
@@ -30,15 +29,17 @@ keymap("n", "<Leader>f", ":Files<CR>", add_desc(opts, "Fuzzy finder."))
 keymap("n", "<f2>", ":set cursorcolumn! <bar> set cursorline! <CR>", add_desc(opts, "Toggle crosshairs."))
 
 -- Toggle column 80 highlight.
-keymap("n", "<f3>", ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>', add_desc(opts, "Toggle column 80 highlight."))
+keymap("n", "<f3>", ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>',
+    add_desc(opts, "Toggle column 80 highlight."))
 
 -- Remove trailing whitespace.
-keymap("n", "<f5>", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif]], add_desc(opts, "Remove trailing whitespace."))
+keymap("n", "<f5>", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif]],
+    add_desc(opts, "Remove trailing whitespace."))
 
 -- Map f20 to shift-f8.
 -- On my terminal, pressing shift-f8 generates the code for f20.
 -- Allowing remapping here is intentional.
-keymap("n", "<f20>", "<s-f8>", {silent=true})
+keymap("n", "<f20>", "<s-f8>", { silent = true })
 
 -- Neoformat mapping.
 keymap("n", "<f7>", ":Neoformat <CR>", add_desc(opts, "Invoke Neoformat."))
@@ -50,8 +51,12 @@ keymap("n", "<f9>", ":setlocal spell! <CR>", add_desc(opts, "Toggle spell checki
 keymap("n", "<C-d>", "<C-d>zz", add_desc(opts, "Scroll half page down."))
 keymap("n", "<C-u>", "<C-u>zz", add_desc(opts, "Scroll half page up."))
 
--- Experimental
-keymap("n", "<space>C", ":lua package.loaded['colorbuddy'] = nil package.loaded['cobalt2'] = nil require('colorbuddy').colorscheme('cobalt2')<CR>", add_desc(opts, "Cobalt2 colorscheme"))
+-- Toggle file explorer
+keymap("n", "<f1>", ":NvimTreeToggle<CR>", add_desc(opts, "Toggle file explorer."))
+
+-- Toggle nebulous colorscheme modes.
+keymap("n", "<F32>", ":lua require('nebulous.functions').toggle_variant()<CR>",
+    add_desc(opts, "Cycle through nebulous colorscheme modes."))
 
 -- -------------------
 -- Insert mode keymaps
