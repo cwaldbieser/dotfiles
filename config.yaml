@@ -42,6 +42,9 @@ dotfiles:
   f_injections.scm:
     src: config/nvim/after/queries/python/injections.scm
     dst: ~/.config/nvim/after/queries/python/injections.scm
+  d_ranger:
+    src: config/ranger
+    dst: ~/.config/ranger
 profiles:
   work:
     dotfiles:
@@ -54,3 +57,4 @@ profiles:
     - d_lua
     - f_init.lua
     - f_injections.scm
+    - d_ranger
