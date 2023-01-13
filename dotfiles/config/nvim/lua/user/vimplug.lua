@@ -52,8 +52,6 @@ Plug('folke/which-key.nvim')
 -- Lua colorschemes
 Plug('tjdevries/colorbuddy.nvim')
 Plug('lalitmee/cobalt2.nvim')
----- Ranger file manager integration.
---Plug('kevinhwang91/rnvimr')
 -- nvim-tree file explorer
 Plug('nvim-tree/nvim-tree.lua')
 vim.call('plug#end')
