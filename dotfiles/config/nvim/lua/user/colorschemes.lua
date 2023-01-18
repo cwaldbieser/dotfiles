@@ -14,6 +14,30 @@ vim.cmd('colorscheme night-owl')
 -- Configure colorswitcher
 -- -----------------------
 
+--vim.g.colorscheme_switcher_exclude_builtins = 1
+vim.g.colorscheme_switcher_exclude = {
+    "dawnfox",
+    "default",
+    "delek",
+    "desert",
+    "elflord",
+    "evening",
+    "habamax",
+    "industry",
+    "koehler",
+    "morning",
+    "murphy",
+    "pablo",
+    "peachpuff",
+    "quiet",
+    "radioactive_waste",
+    "ron",
+    "shine",
+    "slate",
+    "tokyonight-day",
+    "torte",
+    "zellner",
+}
 vim.g.colorscheme_switcher_command = "ColorSwitch"
 
 local function swtchcolors(opts)

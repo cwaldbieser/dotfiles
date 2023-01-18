@@ -31,9 +31,11 @@ Plug('rmehri01/onenord.nvim', { branch = 'main' })
 Plug('pineapplegiant/spaceduck', { branch = 'main' })
 Plug('folke/tokyonight.nvim', { branch = 'main' })
 Plug('Yagua/nebulous.nvim')
+Plug('voidekh/kyotonight.vim')
 -- Colorscheme switcher.
 Plug('xolox/vim-misc')
-Plug('xolox/vim-colorscheme-switcher')
+-- Plug('xolox/vim-colorscheme-switcher')
+Plug('cwaldbieser/vim-colorscheme-switcher', { branch = 'lua-colors'})
 -- Gitgutter
 Plug('airblade/vim-gitgutter')
 -- Easymotion
