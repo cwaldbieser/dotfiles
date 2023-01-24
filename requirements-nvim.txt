@@ -1,7 +1,5 @@
-neovim
-msgpack
-jedi
-flake8
-black
-sqlparse
-isort
+greenlet==2.0.1
+jedi==0.18.1
+msgpack==1.0.4
+parso==0.8.3
+pynvim==0.4.3
