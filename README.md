@@ -44,4 +44,13 @@ environment, you need to install the treesitter cli into it:
 ```shell
 $ npm install -g tree-sitter-cli
 ```
+### Language servers
 
+#### Typescript
+
+If you change the default node environment remember to install the TypeScript
+language server with:
+
+```shell
+$ npm install -g typescript-language-server
+```
