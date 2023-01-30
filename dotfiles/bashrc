@@ -162,3 +162,6 @@ export DOTDROP_PROFILE=work
 
 # AWS CLI completion
 complete -C /usr/local/bin/aws_completer aws
+
+# yamlfix configuration
+export YAMLFIX_EXPLICIT_START="false"
