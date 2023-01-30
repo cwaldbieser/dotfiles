@@ -23,6 +23,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, add_desc(bufopts, 'Go to type definition.'))
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, add_desc(bufopts, 'Rename symbol.'))
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
+    vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
     vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end,
         add_desc(bufopts, 'Format code.'))
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
