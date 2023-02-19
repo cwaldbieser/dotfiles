@@ -35,7 +35,7 @@ Plug('voidekh/kyotonight.vim')
 -- Colorscheme switcher.
 Plug('xolox/vim-misc')
 -- Plug('xolox/vim-colorscheme-switcher')
-Plug('cwaldbieser/vim-colorscheme-switcher', { branch = 'lua-colors'})
+Plug('cwaldbieser/vim-colorscheme-switcher', { branch = 'lua-colors' })
 -- Gitgutter
 Plug('airblade/vim-gitgutter')
 -- Easymotion
@@ -56,4 +56,6 @@ Plug('tjdevries/colorbuddy.nvim')
 Plug('lalitmee/cobalt2.nvim')
 -- nvim-tree file explorer
 Plug('nvim-tree/nvim-tree.lua')
+-- Toggle term
+Plug('akinsho/toggleterm.nvim', { ['tag'] = '2.3.0' })
 vim.call('plug#end')
