@@ -40,8 +40,13 @@ Plug('cwaldbieser/vim-colorscheme-switcher', { branch = 'lua-colors' })
 Plug('airblade/vim-gitgutter')
 -- Easymotion
 Plug('easymotion/vim-easymotion')
+-- Plenary
+-- Required by other plugins; e.g. null-ls
+Plug('nvim-lua/plenary.nvim')
 -- LSP client configuration.
 Plug('neovim/nvim-lspconfig')
+-- null-ls integrates standalone tools as a languare server
+Plug('jose-elias-alvarez/null-ls.nvim')
 -- Completer coq-nvim
 Plug('ms-jpq/coq_nvim', { branch = 'coq' })
 Plug('ms-jpq/coq.artifacts', { branch = 'artifacts' })

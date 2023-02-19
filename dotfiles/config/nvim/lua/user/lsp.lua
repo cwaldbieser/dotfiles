@@ -40,33 +40,8 @@ local lsp = require('lspconfig')
 -- ------------------------------------
 -- Python language server configuration
 -- ------------------------------------
-lsp.pylsp.setup {
+lsp.jedi_language_server.setup {
     on_attach = on_attach,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    settings = {
-        pylsp = {
-            plugins = {
-                black = {
-                    enabled = true,
-                    cache_config = true, -- default false
-                    line_length = 88, -- default 88
-                    preview = true
-                },
-                flake8 = {
-                    enabled = true,
-                    maxLineLength = 95
-                },
-                mccabe = {
-                    enabled = false
-                },
-                pycodestyle = {
-                    enabled = false,
-                }
-            }
-        }
-    }
 }
 
 -- ----------------------------------------
