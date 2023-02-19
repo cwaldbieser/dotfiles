@@ -32,9 +32,12 @@ local keymap = vim.api.nvim_set_keymap
 -- Default options for keymaps.
 local opts = { noremap = true, silent = true }
 
+-- <f13> => <S-f1>
 keymap("n", "<f13>", "<cmd>ToggleTerm direction=horizontal<CR>", add_desc(opts, "Open terminal horizontal."))
 keymap("t", "<f13>", "<cmd>ToggleTerm direction=horizontal<CR>", add_desc(opts, "Open terminal horizontal."))
+-- <f25> => <C-f1>
 keymap("n", "<f25>", "<cmd>ToggleTerm direction=float<CR>", add_desc(opts, "Open terminal floating."))
 keymap("t", "<f25>", "<cmd>ToggleTerm direction=float<CR>", add_desc(opts, "Open terminal floating."))
+-- <f49> => <M-f1>
 keymap("n", "<f49>", "<cmd>ToggleTerm direction=vertical<CR>", add_desc(opts, "Open terminal vertical."))
 keymap("t", "<f49>", "<cmd>ToggleTerm direction=vertical<CR>", add_desc(opts, "Open terminal vertical."))
