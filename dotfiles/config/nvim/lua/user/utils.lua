@@ -18,6 +18,16 @@ M["isdir"] = function(path)
     return M["exists"](path .. "/")
 end
 
+-- Return lines from file.
+M["lines_from"] = function(file)
+    if not M['exists'](file) then return {} end
+    local lines = {}
+    for line in io.lines(file) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
 -- Table print
 M["tprint"] = function(tbl, indent)
     if not indent then indent = 0 end
