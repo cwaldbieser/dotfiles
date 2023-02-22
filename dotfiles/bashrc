@@ -1,3 +1,5 @@
+#! /bin/bash
+#
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -66,7 +68,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    #PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -74,6 +76,7 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
+    # shellcheck disable=2015
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
@@ -102,6 +105,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
+    # shellcheck source=./.bash
     . ~/.bash_aliases
 fi
 
@@ -130,6 +134,7 @@ bind -m vi-insert "\C-e.":end-of-line
 bind -m vi-insert "\C-w.":backward-kill-word
 
 # Virtualenvwrapper
+# shellcheck disable=1094
 . /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Created by `pipx` on 2022-11-20 00:28:47
@@ -145,6 +150,7 @@ eval "$(pyenv virtualenv-init -)"
 export PIPENV_VENV_IN_PROJECT=1
 
 # Custom PS1
+# shellcheck source=./.bash_prompt
 source ~/.bash_prompt
 
 # Disable python virtualenv prompt customization.
@@ -165,3 +171,8 @@ complete -C /usr/local/bin/aws_completer aws
 
 # yamlfix configuration
 export YAMLFIX_EXPLICIT_START="false"
+
+# Create .pyinit files
+function make_pyinit {
+    type python | sed -e 's/^python is //g' >.pyinit
+}
