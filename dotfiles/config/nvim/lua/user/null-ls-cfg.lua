@@ -1,5 +1,7 @@
 local null_ls = require("null-ls")
 
+local jsontool = require('user.jsontool')
+
 null_ls.setup({
     sources = {
         null_ls.builtins.completion.spell,
@@ -11,12 +13,15 @@ null_ls.setup({
         null_ls.builtins.diagnostics.shellcheck, -- shell script diagnostics
         null_ls.builtins.code_actions.shellcheck, -- shell script code actions
         null_ls.builtins.formatting.shfmt, -- shell script formatting
+
         null_ls.builtins.diagnostics.sqlfluff.with({
             extra_args = { "--dialect", "ansi" }, -- SQL linter
         }),
         null_ls.builtins.formatting.sqlfluff.with({
             extra_args = { "--dialect", "ansi" }, -- SQL formatter
         }),
+        jsontool.diagnostic, -- JSON linter
+        jsontool.formatter, -- JSON formatter
     },
 })
 
@@ -24,7 +29,7 @@ null_ls.setup({
 local add_desc = require("user.keymap_helper").add_desc
 vim.api.nvim_create_augroup("NullLSMaps", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
-    pattern = { "*.sh", ".bashrc", "*.sql" },
+    pattern = { "*.sh", ".bashrc", "*.sql", "json" },
     callback = function(ev)
         local leader_temp = vim.g.mapleader
         local bufopts = { noremap = true, silent = true, buffer = ev.buf }
