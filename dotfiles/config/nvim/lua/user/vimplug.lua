@@ -63,4 +63,6 @@ Plug('lalitmee/cobalt2.nvim')
 Plug('nvim-tree/nvim-tree.lua')
 -- Toggle term
 Plug('akinsho/toggleterm.nvim', { ['tag'] = '2.3.0' })
+-- Refactor tool
+Plug('ThePrimeagen/refactoring.nvim')
 vim.call('plug#end')

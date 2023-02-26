@@ -15,14 +15,6 @@ vim.g.neoformat_yaml_yamlfix = {
 }
 vim.g.neoformat_enabled_yaml = {'yamlfix'}
 
-
--- JSON
-vim.g.neoformat_json_jq = {
-    exe = 'jq',
-    stdin = 1,
-    args = { '--indent', '4', '.' }
-}
-
 -- SQL
 vim.g.neoformat_sql_sqlformat = {
     exe = 'sqlformat',
