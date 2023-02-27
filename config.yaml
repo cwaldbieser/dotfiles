@@ -45,6 +45,9 @@ dotfiles:
   d_ranger:
     src: config/ranger
     dst: ~/.config/ranger
+  f_config:
+    src: config/yamllint/config
+    dst: ~/.config/yamllint/config
 profiles:
   work:
     dotfiles:
@@ -58,3 +61,4 @@ profiles:
     - f_init.lua
     - f_injections.scm
     - d_ranger
+    - f_config
