@@ -46,6 +46,10 @@ lsp.jedi_language_server.setup {
     on_attach = on_attach,
 }
 
+--lsp.ruff_lsp.setup {
+--    on_attach = on_attach,
+--}
+
 -- ----------------------------------------
 -- TypeScript language server configuration
 -- ----------------------------------------
