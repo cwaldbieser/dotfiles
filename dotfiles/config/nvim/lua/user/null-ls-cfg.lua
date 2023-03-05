@@ -21,14 +21,16 @@ null_ls.setup({
         }),
         null_ls.builtins.formatting.sqlfluff.with({
             extra_args = { "--dialect", "ansi" }, -- SQL formatter
+            timeout = 10000, --milliseconds
         }),
+        --null_ls.builtins.formatting.sqlformat,
         null_ls.builtins.diagnostics.rstcheck, -- ReStructured Text linter
         jsontool.diagnostic, -- JSON linter
         jsontool.formatter, -- JSON formatter,
         null_ls.builtins.diagnostics.yamllint, -- YAML linter
         yamlfix.formatter, -- YAML formatter
         null_ls.builtins.formatting.xmlformat, -- XML formatter
-    },
+    }
 })
 
 -- Null-LS keymaps
@@ -42,7 +44,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
         vim.g.mapleader = ' '
         --print("null-ls setting keymaps ...")
         -- Start keymaps
-        vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ timeout_ms = 2000 }) end,
+        vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ timeout_ms = 10000 }) end,
             add_desc(bufopts, "Format code."))
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,
             add_desc(bufopts, "Code action."))

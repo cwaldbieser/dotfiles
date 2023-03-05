@@ -9,33 +9,44 @@ local set_jedi_virtualenv = require("user.jedi-virtualenv-helper").set_jedi_virt
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer.
 -- `on_attach(client, bufnr)`
-local on_attach = function(client, bufnr)
-    set_jedi_virtualenv(client)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    local leader_temp = vim.g.mapleader
-    vim.g.mapleader = ' '
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, add_desc(bufopts, 'Get help on symbol under cursor.'))
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, add_desc(bufopts, 'Go to definition.'))
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, add_desc(bufopts, 'Go to implementation.'))
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, add_desc(bufopts, 'Show references.'))
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, add_desc(bufopts, 'Go to declaration.'))
-    vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, add_desc(bufopts, 'Signature help.'))
-    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, add_desc(bufopts, 'Go to type definition.'))
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, add_desc(bufopts, 'Rename symbol.'))
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
-    vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
-    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end,
-        add_desc(bufopts, 'Format code.'))
-    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
-    vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist, add_desc(bufopts, 'Send diagnostics to location list.'))
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, add_desc(bufopts, 'Previous diagnostic.'))
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, add_desc(bufopts, 'Next diagnostic.'))
-    vim.g.mapleader = leader_temp
-    -- This should really be conditional depending on the LSP server.
-    vim.opt.formatexpr = ""
+local function attach_factory(disabled_features)
+    local on_attach = function(client, bufnr)
+        set_jedi_virtualenv(client)
+        --print("attached " .. client.name)
+        local sc = client.server_capabilities
+        if disabled_features.hoverProvider then
+            sc.hoverProvider = false
+        end
+        -- Enable completion triggered by <c-x><c-o>
+        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        local leader_temp = vim.g.mapleader
+        vim.g.mapleader = ' '
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, add_desc(bufopts, 'Get help on symbol under cursor.'))
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, add_desc(bufopts, 'Go to definition.'))
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, add_desc(bufopts, 'Go to implementation.'))
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, add_desc(bufopts, 'Show references.'))
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, add_desc(bufopts, 'Go to declaration.'))
+        vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, add_desc(bufopts, 'Signature help.'))
+        vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, add_desc(bufopts, 'Go to type definition.'))
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, add_desc(bufopts, 'Rename symbol.'))
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
+        vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, add_desc(bufopts, 'Code action.'))
+        vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end,
+            add_desc(bufopts, 'Format code.'))
+        vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
+        vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist,
+            add_desc(bufopts, 'Send diagnostics to location list.'))
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, add_desc(bufopts, 'Previous diagnostic.'))
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, add_desc(bufopts, 'Next diagnostic.'))
+        vim.g.mapleader = leader_temp
+        -- This should really be conditional depending on the LSP server.
+        vim.opt.formatexpr = ""
+    end
+    return on_attach
 end
+
+local on_attach = attach_factory({})
 
 local lsp = require('lspconfig')
 
@@ -46,9 +57,9 @@ lsp.jedi_language_server.setup {
     on_attach = on_attach,
 }
 
---lsp.ruff_lsp.setup {
---    on_attach = on_attach,
---}
+lsp.ruff_lsp.setup {
+    on_attach = attach_factory({hoverProvider=true}),
+}
 
 -- ----------------------------------------
 -- TypeScript language server configuration
