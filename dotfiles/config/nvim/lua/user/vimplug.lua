@@ -32,6 +32,8 @@ Plug('pineapplegiant/spaceduck', { branch = 'main' })
 Plug('folke/tokyonight.nvim', { branch = 'main' })
 Plug('Yagua/nebulous.nvim')
 Plug('voidekh/kyotonight.vim')
+Plug('rktjmp/lush.nvim') -- Required for bluloco
+Plug('uloco/bluloco.nvim')
 -- Colorscheme switcher.
 Plug('xolox/vim-misc')
 -- Plug('xolox/vim-colorscheme-switcher')

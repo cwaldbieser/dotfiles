@@ -5,7 +5,7 @@
 -- treesitter syntax highlighting config.
 require('nvim-treesitter.configs').setup {
     -- A list of parser names, or "all"
-    ensure_installed = { "c", "json", "lua", "python", "perl", "rust", "sql", "typescript" },
+    ensure_installed = { "c", "json", "lua", "python", "bash", "perl", "rust", "sql", "typescript" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,

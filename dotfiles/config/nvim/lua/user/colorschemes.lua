@@ -3,6 +3,7 @@
 -- --------------------------
 
 require('onenord').setup()
+require('bluloco').setup()
 
 -- Set the colorscheme.
 vim.cmd('colorscheme night-owl')

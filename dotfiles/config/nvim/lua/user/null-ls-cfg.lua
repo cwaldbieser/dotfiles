@@ -8,7 +8,8 @@ null_ls.setup({
         null_ls.builtins.completion.spell,
         null_ls.builtins.code_actions.refactoring, -- multi-language refactoring tool
         null_ls.builtins.formatting.black, -- python formatter
-        null_ls.builtins.formatting.autoflake, -- python remove unused imports
+        null_ls.builtins.formatting.isort, --python import sorter
+        --null_ls.builtins.formatting.autoflake, -- python remove unused imports
         null_ls.builtins.diagnostics.flake8.with({
             extra_args = { "--max-line-length", "95" },
         }), -- python diagnostics

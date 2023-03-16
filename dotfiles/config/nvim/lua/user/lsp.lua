@@ -58,7 +58,7 @@ lsp.jedi_language_server.setup {
 }
 
 lsp.ruff_lsp.setup {
-    on_attach = attach_factory({hoverProvider=true}),
+    on_attach = attach_factory({ hoverProvider = true }),
 }
 
 -- ----------------------------------------
