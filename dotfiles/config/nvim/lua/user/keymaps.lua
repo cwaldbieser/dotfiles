@@ -22,9 +22,6 @@ keymap("n", "<Leader>w", "<C-w>", add_desc(opts, "Alternate window command prefi
 -- Cycle through open buffers.
 keymap("n", "<S-Tab>", ":bnext<CR>", add_desc(opts, "Cycle through buffers."))
 
--- FZF (fuzzy finder) shortcut.
-keymap("n", "<Leader>f", ":Files<CR>", add_desc(opts, "Fuzzy finder."))
-
 -- Toggle crosshairs for current position.
 keymap("n", "<f2>", ":set cursorcolumn! <bar> set cursorline! <CR>", add_desc(opts, "Toggle crosshairs."))
 
@@ -57,6 +54,16 @@ keymap("n", "<f1>", ":NvimTreeToggle<CR>", add_desc(opts, "Toggle file explorer.
 -- Toggle nebulous colorscheme modes.
 keymap("n", "<F32>", ":lua require('nebulous.functions').toggle_variant()<CR>",
     add_desc(opts, "Cycle through nebulous colorscheme modes."))
+
+-- Telescope keymaps
+local telescope_builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, add_desc(opts, "List buffers."))
+vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, add_desc(opts, "Find files."))
+vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, add_desc(opts, "Live grep."))
+vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, add_desc(opts, "Help tags."))
+vim.keymap.set('n', '<leader>fr', telescope_builtin.registers, add_desc(opts, "List registers."))
+vim.keymap.set('n', '<leader>fm', telescope_builtin.marks, add_desc(opts, "List marks."))
+vim.keymap.set('n', '<leader>fs', telescope_builtin.treesitter, add_desc(opts, "Find symbols."))
 
 -- -------------------
 -- Insert mode keymaps

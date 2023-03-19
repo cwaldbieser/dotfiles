@@ -14,9 +14,6 @@ Plug('preservim/nerdcommenter')
 Plug('tpope/vim-unimpaired')
 -- neoformat - code formatter
 Plug('sbdchd/neoformat')
--- FZF
-Plug('junegunn/fzf', { ['do'] = vim.fn['fzf#install'] })
-Plug('junegunn/fzf.vim')
 -- Git Fugitive
 Plug('tpope/vim-fugitive')
 -- Colorschemes
@@ -67,4 +64,7 @@ Plug('nvim-tree/nvim-tree.lua')
 Plug('akinsho/toggleterm.nvim', { ['tag'] = '2.3.0' })
 -- Refactor tool
 Plug('ThePrimeagen/refactoring.nvim')
+-- Telescope
+-- Requires plenary.nvim (see above)
+Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.1' })
 vim.call('plug#end')

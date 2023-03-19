@@ -6,6 +6,8 @@
 local add_desc = require('user.keymap_helper').add_desc
 local set_jedi_virtualenv = require("user.jedi-virtualenv-helper").set_jedi_virtualenv
 
+-- telescope builtins
+local tscope_builtin = require("telescope.builtin")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer.
 -- `on_attach(client, bufnr)`
@@ -25,7 +27,7 @@ local function attach_factory(disabled_features)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, add_desc(bufopts, 'Get help on symbol under cursor.'))
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, add_desc(bufopts, 'Go to definition.'))
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, add_desc(bufopts, 'Go to implementation.'))
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, add_desc(bufopts, 'Show references.'))
+        vim.keymap.set('n', 'gr', tscope_builtin.lsp_references, add_desc(bufopts, 'Show references.'))
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, add_desc(bufopts, 'Go to declaration.'))
         vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, add_desc(bufopts, 'Signature help.'))
         vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, add_desc(bufopts, 'Go to type definition.'))
@@ -37,6 +39,7 @@ local function attach_factory(disabled_features)
         vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, add_desc(bufopts, 'Show diagnostics in float.'))
         vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist,
             add_desc(bufopts, 'Send diagnostics to location list.'))
+        vim.keymap.set('n', '<leader>d', tscope_builtin.diagnostics, add_desc(bufopts, 'Diagnostics.'))
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, add_desc(bufopts, 'Previous diagnostic.'))
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, add_desc(bufopts, 'Next diagnostic.'))
         vim.g.mapleader = leader_temp
