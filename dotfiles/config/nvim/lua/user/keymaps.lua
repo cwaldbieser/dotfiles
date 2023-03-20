@@ -59,6 +59,8 @@ keymap("n", "<F32>", ":lua require('nebulous.functions').toggle_variant()<CR>",
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, add_desc(opts, "List buffers."))
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, add_desc(opts, "Find files."))
+vim.keymap.set('n', '<leader>f.', function() telescope_builtin.find_files { hidden = true } end,
+    add_desc(opts, "Find dotfiles."))
 vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, add_desc(opts, "Live grep."))
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, add_desc(opts, "Help tags."))
 vim.keymap.set('n', '<leader>fr', telescope_builtin.registers, add_desc(opts, "List registers."))

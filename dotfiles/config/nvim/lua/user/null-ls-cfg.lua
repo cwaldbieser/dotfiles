@@ -31,7 +31,8 @@ null_ls.setup({
         null_ls.builtins.diagnostics.yamllint, -- YAML linter
         yamlfix.formatter, -- YAML formatter
         null_ls.builtins.formatting.xmlformat, -- XML formatter
-        null_ls.builtins.formatting.perltidy,  -- perl formatter
+        null_ls.builtins.formatting.perltidy, -- perl formatter
+        null_ls.builtins.formatting.prettier, -- Formatting for typescript, javascript, etc.
     }
 })
 

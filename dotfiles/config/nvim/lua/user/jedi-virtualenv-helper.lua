@@ -85,9 +85,7 @@ M["set_jedi_virtualenv"] = function(lsp_client)
                     --print("init_options: " .. utils.tprint(init_options))
                     lsp_client.config.init_options = vim.tbl_deep_extend("force",
                         lsp_client.config.init_options, init_options)
-                    --print("copied setting: " .. client.config.init_options.workspace.environmentPath)
                     local client_config = lsp_client.config
-                    --vim.lsp.stop_client(lsp_client.id)
                     lsp_client.stop(true)
                     local new_client_id = vim.lsp.start_client(client_config)
                     vim.lsp.buf_attach_client(0, new_client_id)
