@@ -3,6 +3,7 @@
     name = Carl Waldbieser
 [core]
     editor = nvim
+	excludesfile = /home/waldbiec/.gitignore_global
 ;[difftool]
 ;    prompt = false
 ;[diff]

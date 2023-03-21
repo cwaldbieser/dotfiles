@@ -48,6 +48,9 @@ dotfiles:
   f_config:
     src: config/yamllint/config
     dst: ~/.config/yamllint/config
+  f_gitignore_global:
+    src: gitignore_global
+    dst: ~/.gitignore_global
 profiles:
   work:
     dotfiles:
@@ -62,3 +65,4 @@ profiles:
     - f_injections.scm
     - d_ranger
     - f_config
+    - f_gitignore_global
