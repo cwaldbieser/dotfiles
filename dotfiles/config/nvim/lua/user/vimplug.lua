@@ -67,4 +67,6 @@ Plug('ThePrimeagen/refactoring.nvim')
 -- Telescope
 -- Requires plenary.nvim (see above)
 Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.1' })
+-- Undo Tree
+Plug('mbbill/undotree')
 vim.call('plug#end')

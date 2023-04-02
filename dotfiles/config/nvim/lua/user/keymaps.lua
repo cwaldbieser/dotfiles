@@ -29,6 +29,9 @@ keymap("n", "<f2>", ":set cursorcolumn! <bar> set cursorline! <CR>", add_desc(op
 keymap("n", "<f3>", ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>',
     add_desc(opts, "Toggle column 80 highlight."))
 
+-- Toggle undo tree.
+keymap("n", "<f4>", ":UndotreeToggle<CR>", add_desc(opts, "Toggle Undotree"))
+
 -- Remove trailing whitespace.
 keymap("n", "<f5>", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>"endif]],
     add_desc(opts, "Remove trailing whitespace."))
