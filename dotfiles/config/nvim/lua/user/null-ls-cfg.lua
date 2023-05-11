@@ -35,6 +35,9 @@ null_ls.setup({
         null_ls.builtins.formatting.perltidy, -- perl formatter
         null_ls.builtins.formatting.prettier, -- Formatting for typescript, javascript, etc.
         rstfmt.formatter, -- ReStructuredText formatter.
+        null_ls.builtins.formatting.mdformat.with({
+            extra_args = { "--wrap", "80" },
+        }), -- Markdown formatter
     }
 })
 
@@ -42,7 +45,7 @@ null_ls.setup({
 local add_desc = require("user.keymap_helper").add_desc
 vim.api.nvim_create_augroup("NullLSMaps", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
-    pattern = { "*.sh", ".bashrc", "*.sql", "json", "xml", "yaml", "rst" },
+    pattern = { "*.sh", ".bashrc", "*.sql", "json", "xml", "yaml", "rst", "markdown" },
     callback = function(ev)
         local leader_temp = vim.g.mapleader
         local bufopts = { noremap = true, silent = true, buffer = ev.buf }
