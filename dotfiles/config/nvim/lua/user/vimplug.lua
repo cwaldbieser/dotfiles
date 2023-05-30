@@ -35,8 +35,8 @@ Plug('uloco/bluloco.nvim')
 Plug('xolox/vim-misc')
 -- Plug('xolox/vim-colorscheme-switcher')
 Plug('cwaldbieser/vim-colorscheme-switcher', { branch = 'lua-colors' })
--- Gitgutter
-Plug('airblade/vim-gitgutter')
+-- Gitsigns
+Plug('lewis6991/gitsigns.nvim')
 -- Easymotion
 Plug('easymotion/vim-easymotion')
 -- Plenary
