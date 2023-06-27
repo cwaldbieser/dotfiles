@@ -4,10 +4,10 @@
 
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', vim.fn.stdpath('data') .. '/plugged')
--- lualine
-Plug('nvim-lualine/lualine.nvim')
 -- If you want to have icons in your statusline choose one of these
 Plug('nvim-tree/nvim-web-devicons')
+-- lualine
+Plug('nvim-lualine/lualine.nvim')
 -- NERDcomment
 Plug('preservim/nerdcommenter')
 -- vim-unimpared - shortcuts for paired operations like :lnext/:lprev

@@ -14,6 +14,13 @@ require('lualine').setup({
         section_separators = { left = '', right = '' },
     },
     sections = {
+        lualine_b = {
+            "branch", "diff",
+            {
+                "diagnostics",
+                symbols = { error = '', warn = '', info = '', hint = '🔍' },
+            }
+        },
         lualine_x = {
             {
                 'encoding',
