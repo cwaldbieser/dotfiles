@@ -3,6 +3,7 @@
 -- ==================
 
 require('user.vimplug')
+require('user.nvim-webdev-icons')
 require('user.neoformat')
 require('user.options')
 require('user.behaviors')
