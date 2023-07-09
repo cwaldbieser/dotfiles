@@ -31,6 +31,7 @@ null_ls.setup({
         jsontool.formatter, -- JSON formatter,
         null_ls.builtins.diagnostics.yamllint, -- YAML linter
         yamlfix.formatter, -- YAML formatter
+        null_ls.builtins.diagnostics.tidy, -- HTML / XML linter
         null_ls.builtins.formatting.xmllint, -- XML formatter
         null_ls.builtins.formatting.perltidy, -- perl formatter
         null_ls.builtins.formatting.prettier, -- Formatting for typescript, javascript, etc.
