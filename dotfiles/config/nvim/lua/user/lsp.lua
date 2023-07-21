@@ -111,3 +111,23 @@ for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+
+-- -------------------------
+-- Toggle Diagnostics on/off
+-- -------------------------
+vim.g.diagnostics_active = true
+function _G.toggle_diagnostics()
+    if vim.g.diagnostics_active then
+        vim.g.diagnostics_active = false
+        vim.diagnostic.disable(0)
+    else
+        vim.g.diagnostics_active = true
+        vim.diagnostic.enable(0)
+    end
+end
+
+local leader_temp = vim.g.mapleader
+vim.g.mapleader = ' '
+vim.api.nvim_set_keymap('n', '<leader>tt', ':call v:lua.toggle_diagnostics()<CR>', { noremap = true, silent = true })
+vim.g.mapleader = leader_temp
