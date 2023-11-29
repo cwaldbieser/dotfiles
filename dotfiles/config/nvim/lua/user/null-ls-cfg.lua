@@ -18,9 +18,9 @@ null_ls.setup({
         null_ls.builtins.code_actions.shellcheck, -- shell script code actions
         null_ls.builtins.formatting.shfmt, -- shell script formatting
 
-        null_ls.builtins.diagnostics.sqlfluff.with({
-            extra_args = { "--dialect", "ansi" }, -- SQL linter
-        }),
+        --null_ls.builtins.diagnostics.sqlfluff.with({
+        --    extra_args = { "--dialect", "ansi" }, -- SQL linter
+        --}),
         null_ls.builtins.formatting.sqlfluff.with({
             extra_args = { "--dialect", "ansi" }, -- SQL formatter
             timeout = 10000, --milliseconds
