@@ -52,7 +52,6 @@ Plug('ms-jpq/coq.artifacts', { branch = 'artifacts' })
 -- Treesitter syntax highlighting
 -- To install a given languare-- :TSInstall <language_to_install>
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug('nvim-treesitter/playground')
 -- Which key
 Plug('folke/which-key.nvim')
 -- Lua colorschemes
@@ -66,7 +65,7 @@ Plug('akinsho/toggleterm.nvim', { ['tag'] = '2.3.0' })
 Plug('ThePrimeagen/refactoring.nvim')
 -- Telescope
 -- Requires plenary.nvim (see above)
-Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.1' })
+Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.4' })
 -- Undo Tree
 Plug('mbbill/undotree')
 vim.call('plug#end')

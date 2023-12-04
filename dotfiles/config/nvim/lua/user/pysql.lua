@@ -3,7 +3,7 @@ local M = {}
 M["pysqlmagic"] = function()
     local bufnr = 0
     local tree = vim.treesitter.get_parser(bufnr, "python"):parse()[1]
-    local query = vim.treesitter.query.parse_query(
+    local query = vim.treesitter.query.parse(
         "python",
         [[
             (assignment 

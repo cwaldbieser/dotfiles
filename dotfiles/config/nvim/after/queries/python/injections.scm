@@ -1,13 +1,7 @@
 ; extends
 
 (assignment 
-  left: (identifier) @_id (#match? @_id "sql")
-  right: [
-    (string) @sql
-    (binary_operator
-        left: (string) @sql
-        right: (parenthesized_expression)
-    )
-  ]
-)
-
+    left: (identifier) @_id
+    right: (string (string_content) @injection.content)
+    (#match? @_id "sql")
+    (#set! injection.language "sql"))
