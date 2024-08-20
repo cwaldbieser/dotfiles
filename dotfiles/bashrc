@@ -190,7 +190,7 @@ function make_pyinit {
 
 # LDAP tool settings
 export LT_PROJ_FOLDER=~/git-repos/_aws/iam_docker_images/ldap_tool
-export LDAP_HOST=ldap5.lafayette.edu
+export LDAP_HOST=awsldap.ldap-prod.lafayette.edu
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"

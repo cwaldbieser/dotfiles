@@ -2,7 +2,6 @@
 -- Colorschemes configuration
 -- --------------------------
 
-require('onenord').setup()
 require('bluloco').setup()
 
 -- Set the colorscheme.
