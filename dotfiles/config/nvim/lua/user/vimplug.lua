@@ -3,7 +3,7 @@
 -- ========
 
 local Plug = vim.fn['plug#']
-vim.call('plug#begin', vim.fn.stdpath('data') .. '/plugged')
+vim.fn['plug#begin'](vim.fn.stdpath('data') .. '/plugged')
 -- If you want to have icons in your statusline choose one of these
 Plug('nvim-tree/nvim-web-devicons')
 -- lualine
@@ -68,4 +68,4 @@ Plug('ThePrimeagen/refactoring.nvim')
 Plug('nvim-telescope/telescope.nvim')
 -- Undo Tree
 Plug('mbbill/undotree')
-vim.call('plug#end')
+vim.fn['plug#end']()

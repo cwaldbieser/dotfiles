@@ -69,6 +69,7 @@ vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, add_desc(opts, "H
 vim.keymap.set('n', '<leader>fr', telescope_builtin.registers, add_desc(opts, "List registers."))
 vim.keymap.set('n', '<leader>fm', telescope_builtin.marks, add_desc(opts, "List marks."))
 vim.keymap.set('n', '<leader>fs', telescope_builtin.treesitter, add_desc(opts, "Find symbols."))
+vim.keymap.set('n', '<leader>fd', telescope_builtin.diagnostics, add_desc(opts, "Diagnostics."))
 
 -- -------------------
 -- Insert mode keymaps
