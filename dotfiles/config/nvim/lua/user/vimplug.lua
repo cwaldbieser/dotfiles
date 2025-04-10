@@ -44,7 +44,7 @@ Plug('nvim-lua/plenary.nvim')
 -- LSP client configuration.
 Plug('neovim/nvim-lspconfig')
 -- null-ls integrates standalone tools as a languare server
-Plug('jose-elias-alvarez/null-ls.nvim')
+Plug('nvimtools/none-ls.nvim')
 -- Completer coq-nvim
 Plug('ms-jpq/coq_nvim', { branch = 'coq' })
 Plug('ms-jpq/coq.artifacts', { branch = 'artifacts' })
@@ -64,7 +64,6 @@ Plug('akinsho/toggleterm.nvim', { ['tag'] = '2.3.0' })
 Plug('ThePrimeagen/refactoring.nvim')
 -- Telescope
 -- Requires plenary.nvim (see above)
--- Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.4' })
 Plug('nvim-telescope/telescope.nvim')
 -- Undo Tree
 Plug('mbbill/undotree')

@@ -11,11 +11,12 @@ null_ls.setup({
         null_ls.builtins.formatting.black, -- python formatter
         null_ls.builtins.formatting.isort, --python import sorter
         --null_ls.builtins.formatting.autoflake, -- python remove unused imports
-        null_ls.builtins.diagnostics.flake8.with({
-            extra_args = { "--max-line-length", "95" },
-        }), -- python diagnostics
-        null_ls.builtins.diagnostics.shellcheck, -- shell script diagnostics
-        null_ls.builtins.code_actions.shellcheck, -- shell script code actions
+        --null_ls.builtins.diagnostics.flake8.with({
+        --    extra_args = { "--max-line-length", "95" },
+        --}), -- python diagnostics
+        --null_ls.builtins.diagnostics.shellcheck, -- shell script diagnostics
+        null_ls.builtins.formatting.shellharden,
+        --null_ls.builtins.code_actions.shellcheck, -- shell script code actions
         null_ls.builtins.formatting.shfmt, -- shell script formatting
 
         --null_ls.builtins.diagnostics.sqlfluff.with({
@@ -33,7 +34,7 @@ null_ls.setup({
         yamlfix.formatter, -- YAML formatter
         null_ls.builtins.diagnostics.tidy, -- HTML / XML linter
         null_ls.builtins.formatting.xmllint, -- XML formatter
-        null_ls.builtins.formatting.perltidy, -- perl formatter
+        --null_ls.builtins.formatting.perltidy, -- perl formatter
         null_ls.builtins.formatting.prettier, -- Formatting for typescript, javascript, etc.
         rstfmt.formatter, -- ReStructuredText formatter.
         null_ls.builtins.formatting.mdformat.with({

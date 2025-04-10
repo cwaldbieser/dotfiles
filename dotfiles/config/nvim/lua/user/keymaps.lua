@@ -70,6 +70,9 @@ vim.keymap.set('n', '<leader>fr', telescope_builtin.registers, add_desc(opts, "L
 vim.keymap.set('n', '<leader>fm', telescope_builtin.marks, add_desc(opts, "List marks."))
 vim.keymap.set('n', '<leader>fs', telescope_builtin.treesitter, add_desc(opts, "Find symbols."))
 vim.keymap.set('n', '<leader>fd', telescope_builtin.diagnostics, add_desc(opts, "Diagnostics."))
+vim.keymap.set('n', '<leader>fc', telescope_builtin.colorscheme, add_desc(opts, "Colorschemes"))
+vim.keymap.set('n', '<leader>fk', telescope_builtin.keymaps, add_desc(opts, "Keymaps"))
+vim.keymap.set('n', '<leader>s', telescope_builtin.spell_suggest, add_desc(opts, "Spelling suggestions"))
 
 -- -------------------
 -- Insert mode keymaps
