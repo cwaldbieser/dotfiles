@@ -54,6 +54,9 @@ dotfiles:
   d_kitty:
     src: config/kitty
     dst: ~/.config/kitty
+  f_pylintrc:
+    src: pylintrc
+    dst: ~/.pylintrc
 profiles:
   work:
     dotfiles:
@@ -70,3 +73,4 @@ profiles:
     - f_config
     - f_gitignore_global
     - d_kitty
+    - f_pylintrc

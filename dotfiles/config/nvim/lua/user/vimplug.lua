@@ -43,8 +43,9 @@ Plug('easymotion/vim-easymotion')
 Plug('nvim-lua/plenary.nvim')
 -- LSP client configuration.
 Plug('neovim/nvim-lspconfig')
--- null-ls integrates standalone tools as a languare server
+-- null-ls integrates standalone tools as a language server
 Plug('nvimtools/none-ls.nvim')
+Plug('nvimtools/none-ls-extras.nvim')
 -- Completer coq-nvim
 Plug('ms-jpq/coq_nvim', { branch = 'coq' })
 Plug('ms-jpq/coq.artifacts', { branch = 'artifacts' })
