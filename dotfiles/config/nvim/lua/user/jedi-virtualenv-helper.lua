@@ -88,7 +88,9 @@ M["set_jedi_virtualenv"] = function(lsp_client)
                     local client_config = lsp_client.config
                     lsp_client.stop(true)
                     local new_client_id = vim.lsp.start_client(client_config)
-                    vim.lsp.buf_attach_client(0, new_client_id)
+                    if new_client_id ~= nil then
+                        vim.lsp.buf_attach_client(0, new_client_id)
+                    end
                     --print("new client ID: " .. new_client_id)
                 end
             end
