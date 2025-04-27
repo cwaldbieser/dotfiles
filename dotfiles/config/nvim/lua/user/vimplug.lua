@@ -32,6 +32,9 @@ Plug("rktjmp/lush.nvim") -- Required for bluloco
 Plug("uloco/bluloco.nvim")
 Plug("eldritch-theme/eldritch.nvim")
 Plug("catppuccin/nvim", { as = "catppuccin" })
+Plug("jim-at-jibba/ariake.nvim")
+Plug("slugbyte/lackluster.nvim")
+Plug("atmosuwiryo/vim-winteriscoming")
 -- Colorscheme switcher.
 Plug("xolox/vim-misc")
 -- Plug('xolox/vim-colorscheme-switcher')
@@ -56,9 +59,6 @@ Plug("ms-jpq/coq.artifacts", { branch = "artifacts" })
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 -- Which key
 Plug("folke/which-key.nvim")
--- Lua colorschemes
-Plug("tjdevries/colorbuddy.nvim")
-Plug("lalitmee/cobalt2.nvim")
 -- nvim-tree file explorer
 Plug("nvim-tree/nvim-tree.lua")
 -- Toggle term
@@ -70,4 +70,6 @@ Plug("ThePrimeagen/refactoring.nvim")
 Plug("nvim-telescope/telescope.nvim")
 -- Undo Tree
 Plug("mbbill/undotree")
+-- Ref jump
+Plug("mawkler/refjump.nvim")
 vim.fn["plug#end"]()

@@ -16,7 +16,10 @@ vim.cmd('colorscheme night-owl')
 
 --vim.g.colorscheme_switcher_exclude_builtins = 1
 vim.g.colorscheme_switcher_exclude = {
+    "bluloco-light",
+    "catppuccin-latte",
     "dawnfox",
+    "dayfox",
     "default",
     "delek",
     "desert",
@@ -37,6 +40,8 @@ vim.g.colorscheme_switcher_exclude = {
     "tokyonight-day",
     "torte",
     "zellner",
+    "WinterIsComing-light-color-no-italics-theme",
+    "WinterIsComing-light-color-theme",
 }
 vim.g.colorscheme_switcher_command = "ColorSwitch"
 

@@ -1,0 +1,2 @@
+require('refjump.init').setup()
+
