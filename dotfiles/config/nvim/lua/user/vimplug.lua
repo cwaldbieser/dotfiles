@@ -72,4 +72,6 @@ Plug("nvim-telescope/telescope.nvim")
 Plug("mbbill/undotree")
 -- Ref jump
 Plug("mawkler/refjump.nvim")
+-- screenkey
+Plug("NStefan002/screenkey.nvim")
 vim.fn["plug#end"]()
