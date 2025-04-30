@@ -4,6 +4,7 @@
 
 require('user.vimplug')
 require('user.nvim-webdev-icons')
+require('user.mini-icons')
 require('user.neoformat')
 require('user.options')
 require('user.behaviors')
@@ -23,3 +24,4 @@ require('user.undotree')
 require('user.pysql')
 require('user.refjump')
 require('user.screenkey')
+require('user.keepcursor')

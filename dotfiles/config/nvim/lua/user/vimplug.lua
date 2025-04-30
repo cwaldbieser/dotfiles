@@ -6,6 +6,7 @@ local Plug = vim.fn["plug#"]
 vim.fn["plug#begin"](vim.fn.stdpath("data") .. "/plugged")
 -- If you want to have icons in your statusline choose one of these
 Plug("nvim-tree/nvim-web-devicons")
+Plug("echasnovski/mini.icons")
 -- lualine
 Plug("nvim-lualine/lualine.nvim")
 -- NERDcomment
@@ -74,4 +75,6 @@ Plug("mbbill/undotree")
 Plug("mawkler/refjump.nvim")
 -- screenkey
 Plug("NStefan002/screenkey.nvim")
+-- keepcursor
+Plug("rlychrisg/keepcursor.nvim")
 vim.fn["plug#end"]()
