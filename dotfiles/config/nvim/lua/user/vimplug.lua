@@ -24,10 +24,10 @@ Plug("morhetz/gruvbox")
 Plug("rafamadriz/neon")
 Plug("EdenEast/nightfox.nvim")
 Plug("haishanh/night-owl.vim")
+--Plug("oxfist/night-owl.nvim")
 Plug("arcticicestudio/nord-vim")
 Plug("pineapplegiant/spaceduck", { branch = "main" })
 Plug("folke/tokyonight.nvim", { branch = "main" })
-Plug("Yagua/nebulous.nvim")
 Plug("voidekh/kyotonight.vim")
 Plug("rktjmp/lush.nvim") -- Required for bluloco
 Plug("uloco/bluloco.nvim")
@@ -36,10 +36,12 @@ Plug("catppuccin/nvim", { as = "catppuccin" })
 Plug("jim-at-jibba/ariake.nvim")
 Plug("slugbyte/lackluster.nvim")
 Plug("atmosuwiryo/vim-winteriscoming")
+Plug("kvrohit/substrata.nvim")
+Plug("zaldih/themery.nvim")
 -- Colorscheme switcher.
-Plug("xolox/vim-misc")
+--Plug("xolox/vim-misc")
 -- Plug('xolox/vim-colorscheme-switcher')
-Plug("cwaldbieser/vim-colorscheme-switcher", { branch = "lua-colors" })
+--Plug("cwaldbieser/vim-colorscheme-switcher", { branch = "lua-colors" })
 -- Gitsigns
 Plug("lewis6991/gitsigns.nvim")
 -- Easymotion
@@ -61,7 +63,7 @@ Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 -- Which key
 Plug("folke/which-key.nvim")
 -- nvim-tree file explorer
-Plug("nvim-tree/nvim-tree.lua")
+--Plug("nvim-tree/nvim-tree.lua")
 -- Toggle term
 Plug("akinsho/toggleterm.nvim", { ["tag"] = "2.3.0" })
 -- Refactor tool
@@ -77,4 +79,6 @@ Plug("mawkler/refjump.nvim")
 Plug("NStefan002/screenkey.nvim")
 -- keepcursor
 Plug("rlychrisg/keepcursor.nvim")
+-- snacks
+Plug("folke/snacks.nvim")
 vim.fn["plug#end"]()

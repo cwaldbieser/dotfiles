@@ -22,6 +22,15 @@ keymap("n", "<Leader>w", "<C-w>", add_desc(opts, "Alternate window command prefi
 -- Cycle through open buffers.
 keymap("n", "<S-Tab>", ":bnext<CR>", add_desc(opts, "Cycle through buffers."))
 
+-- """""""""""""
+-- Function keys
+-- """""""""""""
+
+local snacks = require("snacks")
+vim.keymap.set("n", "<f1>", function()
+	snacks.explorer()
+end, add_desc(opts, "Toggle file explorer."))
+
 -- Toggle crosshairs for current position.
 keymap("n", "<f2>", ":set cursorcolumn! <bar> set cursorline! <CR>", add_desc(opts, "Toggle crosshairs."))
 
@@ -44,10 +53,11 @@ keymap(
 	add_desc(opts, "Remove trailing whitespace.")
 )
 
--- Map f20 to shift-f8.
--- On my terminal, pressing shift-f8 generates the code for f20.
--- Allowing remapping here is intentional.
-keymap("n", "<f20>", "<s-f8>", { silent = true })
+-- Lazygit
+vim.keymap.set("n", "<f6>", snacks.lazygit.open, add_desc(opts, "List buffers."))
+vim.keymap.set("n", "<F18>", snacks.lazygit.log, add_desc(opts, "List buffers."))
+
+keymap("n", "<f8>", ":Themery <CR>", add_desc(opts, "Choose theme."))
 
 -- Neoformat mapping.
 keymap("n", "<f7>", ":Neoformat <CR>", add_desc(opts, "Invoke Neoformat."))
@@ -55,27 +65,12 @@ keymap("n", "<f7>", ":Neoformat <CR>", add_desc(opts, "Invoke Neoformat."))
 -- Toggle spell checking.
 keymap("n", "<f9>", ":setlocal spell! <CR>", add_desc(opts, "Toggle spell checking."))
 
--- Set alternate preferences.
-keymap(
-	"n",
-	"<f10>",
-	":ToggleCursorMid <CR> :colorscheme WinterIsComing-dark-blue-color-theme <CR>",
-	add_desc(opts, "Alt prefs")
-)
+-- Keep cursor in middle of page.
+keymap("n", "<f10>", ":ToggleCursorMid <CR>", add_desc(opts, "Typewriter mode"))
+
 -- After paging half a screen, center the line in the middle of the screen.
 keymap("n", "<C-d>", "<C-d>zz", add_desc(opts, "Scroll half page down."))
 keymap("n", "<C-u>", "<C-u>zz", add_desc(opts, "Scroll half page up."))
-
--- Toggle file explorer
-keymap("n", "<f1>", ":NvimTreeToggle<CR>", add_desc(opts, "Toggle file explorer."))
-
--- Toggle nebulous colorscheme modes.
-keymap(
-	"n",
-	"<F32>",
-	":lua require('nebulous.functions').toggle_variant()<CR>",
-	add_desc(opts, "Cycle through nebulous colorscheme modes.")
-)
 
 -- Telescope keymaps
 local telescope_builtin = require("telescope.builtin")
