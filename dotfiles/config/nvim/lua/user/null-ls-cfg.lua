@@ -7,7 +7,7 @@ local rstfmt = require("user.rstfmt")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.completion.spell,
-		null_ls.builtins.code_actions.refactoring, -- multi-language refactoring tool
+		--null_ls.builtins.code_actions.refactoring, -- multi-language refactoring tool
 		null_ls.builtins.formatting.black, -- python formatter
 		null_ls.builtins.formatting.isort, --python import sorter
 		null_ls.builtins.diagnostics.pylint.with({

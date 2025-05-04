@@ -13,8 +13,6 @@ Plug("nvim-lualine/lualine.nvim")
 Plug("preservim/nerdcommenter")
 -- vim-unimpared - shortcuts for paired operations like :lnext/:lprev
 Plug("tpope/vim-unimpaired")
--- neoformat - code formatter
-Plug("sbdchd/neoformat")
 -- Git Fugitive
 Plug("tpope/vim-fugitive")
 -- Colorschemes
@@ -37,15 +35,18 @@ Plug("jim-at-jibba/ariake.nvim")
 Plug("slugbyte/lackluster.nvim")
 Plug("atmosuwiryo/vim-winteriscoming")
 Plug("kvrohit/substrata.nvim")
-Plug("zaldih/themery.nvim")
+Plug("nyoom-engineering/oxocarbon.nvim")
+Plug("mhartington/oceanic-next")
+Plug("shaunsingh/moonlight.nvim")
+Plug("zootedb0t/citruszest.nvim")
 -- Colorscheme switcher.
---Plug("xolox/vim-misc")
--- Plug('xolox/vim-colorscheme-switcher')
---Plug("cwaldbieser/vim-colorscheme-switcher", { branch = "lua-colors" })
+Plug("zaldih/themery.nvim")
 -- Gitsigns
 Plug("lewis6991/gitsigns.nvim")
 -- Easymotion
 Plug("easymotion/vim-easymotion")
+-- Flash.nim
+Plug("folke/flash.nvim")
 -- Plenary
 -- Required by other plugins; e.g. null-ls
 Plug("nvim-lua/plenary.nvim")
@@ -62,12 +63,10 @@ Plug("ms-jpq/coq.artifacts", { branch = "artifacts" })
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 -- Which key
 Plug("folke/which-key.nvim")
--- nvim-tree file explorer
---Plug("nvim-tree/nvim-tree.lua")
 -- Toggle term
 Plug("akinsho/toggleterm.nvim", { ["tag"] = "2.3.0" })
 -- Refactor tool
-Plug("ThePrimeagen/refactoring.nvim")
+--Plug("ThePrimeagen/refactoring.nvim")
 -- Telescope
 -- Requires plenary.nvim (see above)
 Plug("nvim-telescope/telescope.nvim")
@@ -81,4 +80,11 @@ Plug("NStefan002/screenkey.nvim")
 Plug("rlychrisg/keepcursor.nvim")
 -- snacks
 Plug("folke/snacks.nvim")
+-- ufo; code folding
+Plug("kevinhwang91/promise-async")
+Plug("kevinhwang91/nvim-ufo")
+-- noice
+Plug("MunifTanjim/nui.nvim")
+Plug("rcarriga/nvim-notify")
+Plug("folke/noice.nvim")
 vim.fn["plug#end"]()

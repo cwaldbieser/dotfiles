@@ -2,6 +2,14 @@
 -- User custom keymaps
 -- ===================
 
+-- Mode codes
+-- n = normal
+-- v = visual
+-- i = insert
+-- c = command
+-- x = Ex mode
+-- o = operation pending
+
 -- Utility functions
 local add_desc = require("user.keymap_helper").add_desc
 local keymap = vim.api.nvim_set_keymap
@@ -22,18 +30,41 @@ keymap("n", "<Leader>w", "<C-w>", add_desc(opts, "Alternate window command prefi
 -- Cycle through open buffers.
 keymap("n", "<S-Tab>", ":bnext<CR>", add_desc(opts, "Cycle through buffers."))
 
--- """""""""""""
--- Function keys
--- """""""""""""
+-- -------------------
+-- Insert mode keymaps
+-- -------------------
 
+-- Enter normal mode from Insert mode without having to stretch one's fingers
+-- up to Esc.
+keymap("i", "jk", "<esc>", add_desc(opts, "Enter Normal mode."))
+
+-- -------------------
+-- Visual mode keymaps
+-- -------------------
+
+-- When indenting / dedenting, retain the selection.
+keymap("v", "<", "<gv", add_desc(opts, "Dedent block."))
+keymap("v", ">", ">gv", add_desc(opts, "Indent block."))
+
+-- Move blocks of text up and down.
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", add_desc(opts, "Move block up 1 line."))
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", add_desc(opts, "Move block down 1 line."))
+
+-- -------------
+-- Function keys
+-- -------------
+
+-- f1
 local snacks = require("snacks")
 vim.keymap.set("n", "<f1>", function()
 	snacks.explorer()
 end, add_desc(opts, "Toggle file explorer."))
 
+-- f2
 -- Toggle crosshairs for current position.
 keymap("n", "<f2>", ":set cursorcolumn! <bar> set cursorline! <CR>", add_desc(opts, "Toggle crosshairs."))
 
+-- f3
 -- Toggle column 80 highlight.
 keymap(
 	"n",
@@ -42,9 +73,11 @@ keymap(
 	add_desc(opts, "Toggle column 80 highlight.")
 )
 
+-- f4
 -- Toggle undo tree.
 keymap("n", "<f4>", ":UndotreeToggle<CR>", add_desc(opts, "Toggle Undotree"))
 
+-- f5
 -- Remove trailing whitespace.
 keymap(
 	"n",
@@ -53,18 +86,20 @@ keymap(
 	add_desc(opts, "Remove trailing whitespace.")
 )
 
+-- f6, SHIFT+f6
 -- Lazygit
-vim.keymap.set("n", "<f6>", snacks.lazygit.open, add_desc(opts, "List buffers."))
-vim.keymap.set("n", "<F18>", snacks.lazygit.log, add_desc(opts, "List buffers."))
+vim.keymap.set("n", "<f6>", snacks.lazygit.open, add_desc(opts, "Lazygit"))
+vim.keymap.set("n", "<F18>", snacks.lazygit.log, add_desc(opts, "Lazygit log"))
 
+-- f8
+-- Themery colorscheme selector
 keymap("n", "<f8>", ":Themery <CR>", add_desc(opts, "Choose theme."))
 
--- Neoformat mapping.
-keymap("n", "<f7>", ":Neoformat <CR>", add_desc(opts, "Invoke Neoformat."))
-
+-- f9
 -- Toggle spell checking.
 keymap("n", "<f9>", ":setlocal spell! <CR>", add_desc(opts, "Toggle spell checking."))
 
+-- f10
 -- Keep cursor in middle of page.
 keymap("n", "<f10>", ":ToggleCursorMid <CR>", add_desc(opts, "Typewriter mode"))
 
@@ -89,22 +124,11 @@ vim.keymap.set("n", "<leader>fc", telescope_builtin.colorscheme, add_desc(opts, 
 vim.keymap.set("n", "<leader>fk", telescope_builtin.keymaps, add_desc(opts, "Keymaps"))
 vim.keymap.set("n", "<leader>s", telescope_builtin.spell_suggest, add_desc(opts, "Spelling suggestions"))
 
--- -------------------
--- Insert mode keymaps
--- -------------------
-
--- Enter normal mode from Insert mode without having to stretch one's fingers
--- up to Esc.
-keymap("i", "jk", "<esc>", add_desc(opts, "Enter Normal mode."))
-
--- -------------------
--- Visual mode keymaps
--- -------------------
-
--- When indenting / dedenting, retain the selection.
-keymap("v", "<", "<gv", add_desc(opts, "Dedent block."))
-keymap("v", ">", ">gv", add_desc(opts, "Indent block."))
-
--- Move blocks of text up and down.
-keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", add_desc(opts, "Move block up 1 line."))
-keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", add_desc(opts, "Move block down 1 line."))
+-- -------------
+-- Flash keymaps
+-- -------------
+local flash = require("flash")
+vim.keymap.set({"n", "x", "o"}, "s", function() flash.jump() end, add_desc(opts, "Flash"))
+vim.keymap.set({"n", "x", "o"}, "S", function() flash.treesitter() end, add_desc(opts, "Flash Treesitter"))
+vim.keymap.set("o", "r", function() flash.remote() end, add_desc(opts, "Remote Flash"))
+vim.keymap.set("c", "<c-s>", function() flash.toggle() end, add_desc(opts, "Toggle Flash Search"))
