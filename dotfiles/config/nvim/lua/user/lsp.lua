@@ -68,11 +68,14 @@ vim.g.coq_settings = {
 		always = false,
 	},
 }
+local coq = require("coq")
+local capabilities = coq.lsp_ensure_capabilities()
 
 -- ------------------------------------
 -- Python language server configuration
 -- ------------------------------------
 lsp.jedi_language_server.setup({
+    capabilities = capabilities,
 	on_attach = on_attach,
 	ini_options = {
 		disableSnippets = false,
@@ -85,6 +88,7 @@ lsp.jedi_language_server.setup({
 -- TypeScript language server configuration
 -- ----------------------------------------
 lsp.ts_ls.setup({
+    capabilities = capabilities,
 	on_attach = on_attach,
 })
 
@@ -92,6 +96,7 @@ lsp.ts_ls.setup({
 -- Lua language server
 -- -------------------
 lsp.lua_ls.setup({
+    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         Lua = {
