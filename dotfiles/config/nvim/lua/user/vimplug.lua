@@ -44,7 +44,7 @@ Plug("zaldih/themery.nvim")
 -- Gitsigns
 Plug("lewis6991/gitsigns.nvim")
 -- Easymotion
-Plug("easymotion/vim-easymotion")
+--Plug("easymotion/vim-easymotion")
 -- Flash.nim
 Plug("folke/flash.nvim")
 -- Plenary
