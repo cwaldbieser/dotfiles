@@ -6,9 +6,10 @@
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.listchars = "tab:>-"
 
 -- Python support.
-vim.g.python3_host_prog = '/home/waldbiec/.virtualenvs/neovim.py3.13/bin/python3.13'
+vim.g.python3_host_prog = '/home/waldbiec/.virtualenvs/neovim.py3.14/bin/python3.14'
 
 -- Line numbering
 vim.opt.rnu = true

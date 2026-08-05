@@ -75,7 +75,7 @@ local capabilities = coq.lsp_ensure_capabilities()
 -- Python language server configuration
 -- ------------------------------------
 lsp.jedi_language_server.setup({
-    capabilities = capabilities,
+	capabilities = capabilities,
 	on_attach = on_attach,
 	ini_options = {
 		disableSnippets = false,
@@ -85,41 +85,121 @@ lsp.jedi_language_server.setup({
 })
 
 -- ----------------------------------------
--- TypeScript language server configuration
+-- Dual-Version TypeScript LSP Configuration
 -- ----------------------------------------
-lsp.ts_ls.setup({
-    capabilities = capabilities,
-	on_attach = on_attach,
-})
+
+-- 1. Get the current project root directory
+local util = require("lspconfig.util")
+local root_dir = util.root_pattern("package.json", "tsconfig.json", ".git")(vim.fn.expand("%:p:h"))
+
+-- 2. Check if this is a Native TypeScript 7+ project
+local is_ts7 = false
+if root_dir then
+	local has_legacy_server = vim.fn.filereadable(root_dir .. "/node_modules/typescript/lib/tsserver.js") == 1
+	local has_typescript = vim.fn.isdirectory(root_dir .. "/node_modules/typescript") == 1
+
+	if has_typescript and not has_legacy_server then
+		is_ts7 = true
+	end
+end
+
+-- 3. Conditional Setup
+if is_ts7 then
+	-- Create exact structural types to safely satisfy the Go compiler's strict struct parsing
+	local ts7_capabilities = vim.tbl_deep_extend("force", capabilities or {}, {
+		offsetEncoding = { "utf-8" },
+		textDocument = {
+			positionEncodings = { "utf-8" },
+		},
+		workspace = {
+			configuration = false,
+			didChangeConfiguration = {
+				dynamicRegistration = false,
+			},
+			didChangeWatchedFiles = {
+				dynamicRegistration = false,
+			},
+			diagnostic = {
+				refreshSupport = false,
+			},
+		},
+	})
+
+	-- Defer execution until the filetype buffer is genuinely loaded in memory
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+		callback = function()
+			-- TS7+ Native Client (Go-rewrite engine)
+			vim.lsp.start({
+				name = "typescript-native",
+				cmd = { "npx", "tsc", "--lsp", "--stdio" },
+				root_dir = root_dir or vim.fn.getcwd(),
+				capabilities = ts7_capabilities,
+				on_attach = on_attach,
+
+				before_init = function(params, _)
+					if params.initializationOptions == nil then
+						params.initializationOptions = vim.empty_dict()
+					end
+				end,
+
+				handlers = {
+					["workspace/diagnostic/refresh"] = function(_, _, _, _)
+						return {}
+					end,
+					["client/registerCapability"] = function(err, result, ctx, config)
+						if result and result.registrations then
+							local clean_registrations = {}
+							for _, reg in ipairs(result.registrations) do
+								if reg.method ~= "workspace/didChangeConfiguration" then
+									table.insert(clean_registrations, reg)
+								end
+							end
+							result.registrations = clean_registrations
+						end
+						return vim.lsp.handlers["client/registerCapability"](err, result, ctx, config) or {}
+					end,
+				},
+			})
+		end,
+	})
+else
+	-- TS5 Legacy Client (Your original ts_ls)
+	require("lspconfig").ts_ls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		root_dir = root_dir,
+	})
+end
 
 -- -------------------
 -- Lua language server
 -- -------------------
 lsp.lua_ls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = "LuaJIT",
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-                -- Suppress workspace query for VS Code.
-                checkThirdParty = false,
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { "vim" },
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = vim.api.nvim_get_runtime_file("", true),
+				-- Suppress workspace query for VS Code.
+				checkThirdParty = false,
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
 })
 
 -- -----------------------------

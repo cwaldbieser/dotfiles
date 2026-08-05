@@ -59,7 +59,7 @@ Plug("nvimtools/none-ls-extras.nvim")
 Plug("ms-jpq/coq_nvim", { branch = "coq" })
 Plug("ms-jpq/coq.artifacts", { branch = "artifacts" })
 -- Treesitter syntax highlighting
--- To install a given languare-- :TSInstall <language_to_install>
+-- To install a given language-- :TSInstall <language_to_install>
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 -- Which key
 Plug("folke/which-key.nvim")
@@ -87,4 +87,5 @@ Plug("kevinhwang91/nvim-ufo")
 Plug("MunifTanjim/nui.nvim")
 Plug("rcarriga/nvim-notify")
 Plug("folke/noice.nvim")
+--Plug("github/copilot.vim")
 vim.fn["plug#end"]()

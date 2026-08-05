@@ -37,6 +37,11 @@ keymap("n", "<S-Tab>", ":bnext<CR>", add_desc(opts, "Cycle through buffers."))
 -- Enter normal mode from Insert mode without having to stretch one's fingers
 -- up to Esc.
 keymap("i", "jk", "<esc>", add_desc(opts, "Enter Normal mode."))
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
 
 -- -------------------
 -- Visual mode keymaps

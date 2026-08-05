@@ -27,3 +27,8 @@ require("user.screenkey")
 require("user.keepcursor")
 require("user.ufo")
 require("user.noice")
+
+-- Disable Copilot
+--if vim.g.copilot_enabled ~= false then
+--  vim.g.copilot_enabled = false
+--end

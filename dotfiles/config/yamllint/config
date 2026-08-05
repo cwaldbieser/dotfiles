@@ -2,3 +2,5 @@
 
 rules:
   document-start: disable
+  indentation:
+    spaces: 2
